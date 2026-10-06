@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Panel · Olivia Fest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF1EE; --paper:#fff; --ink:#5A3A42; --soft:#866870; --rose:#C9828F; --rose-deep:#A85A6C; --blush:#F8E4E6;
+  --gold:#A9842F; --line:#EEDAD6; --ok:#1F8A4C; --no:#B2234B;
+  --script:"Great Vibes",cursive; --serif:"Cormorant Garamond",Georgia,serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#22121A;--paper:#331B26;--ink:#FFE9F1;--soft:#D9AFC0;--blush:#4A2537;--line:#55303F;--ok:#7FD6A3;--no:#FF9FB4;--rose-deep:#FF9DC0}}
+:root[data-theme="dark"]{--bg:#22121A;--paper:#331B26;--ink:#FFE9F1;--soft:#D9AFC0;--blush:#4A2537;--line:#55303F;--ok:#7FD6A3;--no:#FF9FB4;--rose-deep:#FF9DC0}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45}
+[hidden]{display:none!important}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 40px}
+header.top{background:linear-gradient(150deg,#EBB6C0,#D08C9C 55%,#A9647A);color:#fff;padding:18px 16px 22px;border-radius:0 0 26px 26px;margin:0 -14px 18px}
+.top-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{font-family:var(--script);font-weight:400;font-size:2.4rem;margin:0;line-height:1;flex:1;min-width:180px}
+.live{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:.9rem;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:999px}
+.dot{width:9px;height:9px;border-radius:50%;background:#7CFFB2;animation:pulse 1.6s infinite}
+.dot.off{background:#FFD36B;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(124,255,178,0)}0%{box-shadow:0 0 0 0 rgba(124,255,178,.7)}}
+.tbtn{border:0;background:rgba(255,255,255,.22);color:#fff;font:inherit;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 14px 26px -22px rgba(150,40,90,.7);margin-bottom:16px}
+h2{font-family:var(--serif);font-size:1.5rem;margin:0 0 12px;font-weight:700}
+.big{display:grid;grid-template-columns:1fr;gap:16px;justify-items:center}
+.big .stats{width:100%}
+@media (min-width:600px){.big{grid-template-columns:auto 1fr;justify-items:stretch}}
+.ring{width:132px;height:132px}
+.ring text{font-family:var(--serif)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:640px){.stats{grid-template-columns:repeat(3,1fr)}}
+.stat{background:var(--blush);border-radius:16px;padding:10px 12px;min-width:0}
+.stat b{display:block;font-size:1.6rem;line-height:1.1;font-family:var(--serif)}
+.stat span{font-size:.88rem;color:var(--soft);font-weight:600}
+.controls{display:grid;gap:14px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.switch label{font-weight:600}
+.switch small{display:block;color:var(--soft);font-weight:400}
+.tog{position:relative;width:54px;height:30px;flex:none}
+.tog input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.tog span{position:absolute;inset:0;border-radius:999px;background:#D9C3CC;transition:.2s}
+.tog span::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.tog input:checked+span{background:var(--rose)}
+.tog input:checked+span::after{transform:translateX(24px)}
+.tog input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+.field{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.field label{font-weight:600;min-width:160px}
+input[type=number],input[type=search],input[type=password],input[type=text],input[type=date],input[type=url]{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;min-width:0}
+input[type=number]{width:96px}
+.field input[type=url]{flex:1;min-width:180px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:9px 18px;cursor:pointer;color:#fff;background:linear-gradient(135deg,#DFA3B0,#C27D8D 55%,#A65F72)}
+.btn.ghost{background:transparent;color:var(--rose-deep);border:1.5px solid var(--rose)}
+.btn.sm{padding:6px 13px;font-size:.88rem}
+.btn:disabled{opacity:.5}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.tab{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 4px;border-radius:14px;cursor:pointer;min-width:0}
+.tab[aria-selected="true"]{background:var(--rose);border-color:var(--rose);color:#fff}
+.tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tools input{flex:1;min-width:160px}
+.seg{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.seg button{font:inherit;font-size:.86rem;font-weight:600;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blush);border-color:var(--rose);color:var(--rose-deep)}
+.add{display:grid;grid-template-columns:1fr 76px auto;gap:8px;margin-bottom:14px}
+.add input[type=number]{width:100%}
+.list{display:grid;gap:10px}
+.item{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:var(--paper)}
+.item .r1{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.item .name{font-weight:700;font-size:1.05rem}
+.pill{display:inline-block;font-size:.8rem;font-weight:700;border-radius:999px;padding:2px 10px;flex:none}
+.pill.si{background:#DDF5E7;color:#17663A}.pill.no{background:#FBE0E6;color:#9C1C3F}.pill.pend{background:#FFF1D6;color:#8A5A00}.pill.out{background:#EDE4FF;color:#5A3FA0}
+.meta{font-size:.9rem;color:var(--soft);margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.meta a{color:var(--rose-deep);font-weight:600}
+.chipsN{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chipsN span{background:var(--blush);border-radius:999px;padding:3px 10px;font-size:.9rem;font-weight:600}
+.msg{margin-top:6px;font-style:italic;font-family:var(--serif);font-size:1.1rem}
+.acts{display:flex;justify-content:flex-end;gap:2px;flex-wrap:wrap;margin-top:6px}
+.act{border:0;background:transparent;color:var(--rose-deep);font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;padding:4px 6px}
+.del{border:0;background:transparent;color:var(--no);font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;padding:4px 6px}
+.gift .r1{align-items:flex-start}
+.gift .ic{font-size:1.6rem;width:40px;text-align:center;flex:none}
+.gbar{height:8px;background:var(--blush);border-radius:99px;overflow:hidden;margin-top:6px}
+.gbar i{display:block;height:100%;background:linear-gradient(90deg,#F3CED5,#B06A7D)}
+.who{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:4px}
+.who li{display:flex;justify-content:space-between;gap:8px;font-size:.92rem;background:var(--bg);border-radius:10px;padding:5px 10px}
+.done-tag{font-size:.8rem;font-weight:700;color:#17663A;background:#DDF5E7;border-radius:999px;padding:1px 8px;margin-left:6px}
+.hidden-msg{opacity:.55}
+.empty{text-align:center;color:var(--soft);padding:22px 10px}
+.count{font-weight:700;margin:0 0 10px}
+.login{max-width:380px;margin:12vh auto 0;text-align:center}
+.login h1{font-family:var(--script);font-weight:400;font-size:3rem;color:var(--rose-deep);margin:0}
+.login form{display:grid;gap:10px;margin-top:14px}
+.err{color:var(--no);font-weight:600;margin:0}
+.note{background:var(--blush);border-radius:14px;padding:12px 14px;font-size:.95rem}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,200%);opacity:0;visibility:hidden;background:#5A3A42;color:#fff;padding:10px 18px;border-radius:14px;font-weight:600;transition:.3s;z-index:9;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<section class="wrap" id="loginView" hidden>
+  <div class="login card">
+    <h1>Olivia Fest</h1>
+    <p style="margin:4px 0 0;color:var(--soft)">Panel de administrador</p>
+    <p class="note" id="noApi" hidden>Falta pegar la URL de Apps Script en el archivo <b>config.js</b>.</p>
+    <form id="loginForm">
+      <input type="password" id="keyIn" placeholder="Clave de administrador" autocomplete="current-password" aria-label="Clave de administrador">
+      <button class="btn" type="submit">Entrar</button>
+      <p class="err" id="loginErr" hidden></p>
+    </form>
+  </div>
+</section>
+
+<div id="panelView" hidden>
+  <div class="wrap">
+    <header class="top">
+      <div class="top-in">
+        <h1>Panel Olivia Fest</h1>
+        <span class="live"><i class="dot" id="dot"></i><span id="liveTxt">En vivo</span></span>
+        <button class="tbtn" id="refreshBtn" type="button">Actualizar</button>
+        <button class="tbtn" id="logoutBtn" type="button">Salir</button>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2>Asistencia</h2>
+      <div class="big">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+          <defs><linearGradient id="rg"><stop offset="0" stop-color="#F3CED5"/><stop offset="1" stop-color="#A9647A"/></linearGradient></defs>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="var(--blush)" stroke-width="14"/>
+          <circle id="ringArc" cx="60" cy="60" r="50" fill="none" stroke="url(#rg)" stroke-width="14" stroke-linecap="round" transform="rotate(-90 60 60)" stroke-dasharray="314.16" stroke-dashoffset="314.16" style="transition:stroke-dashoffset .8s"/>
+          <text x="60" y="58" text-anchor="middle" font-size="30" font-weight="700" fill="currentColor" id="ringNum">0</text>
+          <text x="60" y="78" text-anchor="middle" font-size="13" fill="currentColor" id="ringCap">de 100</text>
+        </svg>
+        <div class="stats">
+          <div class="stat"><b id="sLibres">–</b><span>Lugares libres</span></div>
+          <div class="stat"><b id="sConf">–</b><span>Invitaciones confirmadas</span></div>
+          <div class="stat"><b id="sPend">–</b><span>Pendientes</span></div>
+          <div class="stat"><b id="sNo">–</b><span>No asistirán</span></div>
+          <div class="stat"><b id="sMsg">–</b><span>Mensajes</span></div>
+          <div class="stat"><b id="sRegalos">–</b><span>Regalos elegidos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card controls">
+      <h2 style="margin:0">Control de la invitación</h2>
+      <div class="switch">
+        <label for="showCupos">Mostrar lugares disponibles en la invitación<small>Si lo apagas, el contador solo se ve aquí.</small></label>
+        <span class="tog"><input type="checkbox" id="showCupos" role="switch"><span></span></span>
+      </div>
+      <div class="field"><label for="capIn">Aforo total</label><input type="number" id="capIn" min="1" max="2000" inputmode="numeric"><button class="btn sm" id="capSave" type="button">Guardar</button></div>
+      <div class="field"><label for="cierreIn">Cierre de confirmaciones</label><input type="date" id="cierreIn"><button class="btn sm" id="cierreSave" type="button">Guardar</button></div>
+      <div class="field"><label for="albumIn">Enlace del álbum de la fiesta</label><input type="url" id="albumIn" placeholder="https://photos.app.goo.gl/…"><button class="btn sm" id="albumSave" type="button">Guardar</button></div>
+    </div>
+
+    <div class="card">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-p="paneI" aria-selected="true">Invitados</button>
+        <button class="tab" role="tab" data-p="paneA" aria-selected="false">Asistentes</button>
+        <button class="tab" role="tab" data-p="paneM" aria-selected="false">Mensajes</button>
+        <button class="tab" role="tab" data-p="paneG" aria-selected="false">Regalos</button>
+      </div>
+
+      <div id="paneI" role="tabpanel">
+        <form class="add" id="addForm">
+          <input type="text" id="addName" placeholder="Nombre del invitado (ej. María Pérez)" aria-label="Nombre del invitado" maxlength="80">
+          <input type="number" id="addCupos" min="1" max="30" value="2" aria-label="Cupos">
+          <button class="btn sm" type="submit">Agregar</button>
+        </form>
+        <div class="tools"><input type="search" id="q" placeholder="Buscar invitado" aria-label="Buscar invitado"></div>
+        <div class="seg" id="seg">
+          <button type="button" data-f="todos" aria-pressed="true">Todos</button>
+          <button type="button" data-f="si" aria-pressed="false">Confirmados</button>
+          <button type="button" data-f="pendiente" aria-pressed="false">Pendientes</button>
+          <button type="button" data-f="no" aria-pressed="false">No asistirán</button>
+          <button type="button" data-f="fuera" aria-pressed="false">Fuera de lista</button>
+        </div>
+        <div class="list" id="iList"></div>
+      </div>
+
+      <div id="paneA" role="tabpanel" hidden>
+        <p class="count" id="aCount"></p>
+        <div class="tools"><input type="search" id="qa" placeholder="Buscar asistente" aria-label="Buscar asistente"><button class="btn ghost sm" id="csvBtn" type="button">Descargar Excel (CSV)</button></div>
+        <div class="list" id="aList"></div>
+      </div>
+
+      <div id="paneM" role="tabpanel" hidden><div class="list" id="mList"></div></div>
+
+      <div id="paneG" role="tabpanel" hidden>
+        <div class="list" id="gList"></div>
+        <p class="note" style="margin-top:12px">Los invitados solo ven los regalos disponibles; aquí ves todos y quién eligió cada uno. Para cambiar la lista, edita la pestaña <b>Regalos</b> de tu hoja (cantidad 0 = sin límite).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script>
+/* La URL de Apps Script se pega una sola vez en el archivo config.js */
+const CONFIG = { api: (window.OLIVIA_CONFIG && window.OLIVIA_CONFIG.api) || "" };
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ls = { get(k){ try { return localStorage.getItem(k) || ""; } catch(e){ return ""; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }, del(k){ try { localStorage.removeItem(k); } catch(e){} } };
+let KEY = ls.get("olivia-admin-key"), DATA = null, filtro = "todos", lastOk = 0, timer = null;
+
+function toast(m){ const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 3000); }
+const when = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleString("es-PE", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }); };
+const waNum = c => { let n = String(c).replace(/\D/g, ""); if (n.length === 9) n = "51" + n; return n; };
+const personalLink = id => new URL("./?i=" + encodeURIComponent(id), location.href).href;
+
+async function getAdmin(){ const r = await fetch(`${CONFIG.api}?action=admin&key=${encodeURIComponent(KEY)}&t=${Date.now()}`); return r.json(); }
+async function post(body){ const r = await fetch(CONFIG.api, { method: "POST", body: JSON.stringify({ ...body, key: KEY }) }); return r.json(); }
+function show(view){ $("#loginView").hidden = view !== "login"; $("#panelView").hidden = view !== "panel"; }
+
+async function load(silent){
+  try {
+    const d = await getAdmin();
+    if (!d.ok){
+      if (d.error === "clave"){ ls.del("olivia-admin-key"); KEY = ""; stop(); show("login"); $("#loginErr").textContent = "Clave incorrecta."; $("#loginErr").hidden = false; return false; }
+      throw new Error(d.error);
+    }
+    DATA = d; lastOk = Date.now(); render(); setLive(true); return true;
+  } catch(e){ setLive(false); if (!silent) toast("No se pudo conectar. Reintentando…"); return false; }
+}
+function setLive(ok){ $("#dot").classList.toggle("off", !ok); tickLive(); }
+function tickLive(){ const s = Math.round((Date.now() - lastOk) / 1000); $("#liveTxt").textContent = !lastOk ? "Conectando…" : (s < 5 ? "En vivo" : `Hace ${s} s`); }
+function start(){ stop(); timer = setInterval(() => { if (document.visibilityState === "visible") load(true); }, 15000); }
+function stop(){ if (timer) clearInterval(timer); timer = null; }
+setInterval(tickLive, 1000);
+
+function render(){
+  const s = DATA.stats, c = DATA.config;
+  $("#ringNum").textContent = s.personas; $("#ringCap").textContent = `de ${s.capacidad}`;
+  $("#ringArc").style.strokeDashoffset = 314.16 * (1 - Math.min(1, s.personas / (s.capacidad || 1)));
+  $("#sLibres").textContent = s.libres; $("#sConf").textContent = `${s.confirmadas} de ${s.invitaciones}`;
+  $("#sPend").textContent = s.pendientes; $("#sNo").textContent = s.noAsisten; $("#sMsg").textContent = s.mensajes;
+  $("#sRegalos").textContent = DATA.gifts.reduce((a, g) => a + g.elegidos, 0);
+  $("#showCupos").checked = !!c.mostrarCupos;
+  if (document.activeElement !== $("#capIn")) $("#capIn").value = c.capacidad;
+  if (document.activeElement !== $("#cierreIn")) $("#cierreIn").value = c.cierre || "";
+  if (document.activeElement !== $("#albumIn")) $("#albumIn").value = c.albumUrl || "";
+  renderI(); renderA(); renderM(); renderG();
+}
+function renderI(){
+  const q = $("#q").value.trim().toLowerCase();
+  const rows = DATA.invitados.filter(r => (filtro === "todos" || (filtro === "fuera" ? !r.cupos : r.estado === filtro)) && (!q || r.nombre.toLowerCase().includes(q) || r.asistentes.some(a => a.toLowerCase().includes(q))));
+  const pill = r => r.estado === "si" ? `<span class="pill si">${r.personas}${r.cupos ? " de " + r.cupos : ""}</span>` : r.estado === "no" ? `<span class="pill no">No asistirá</span>` : `<span class="pill pend">Pendiente</span>`;
+  $("#iList").innerHTML = rows.length ? rows.map(r => `
+    <div class="item">
+      <div class="r1"><span class="name">${esc(r.nombre)}</span>${pill(r)}</div>
+      <div class="meta"><span>${r.cupos ? `Cupos: <b>${r.cupos}</b>` : '<span class="pill out">Fuera de lista</span>'}</span>
+        ${r.celular ? `<a href="https://wa.me/${waNum(r.celular)}" target="_blank" rel="noopener">${esc(r.celular)}</a>` : ""}${r.fecha ? `<span>${when(r.fecha)}</span>` : ""}</div>
+      ${r.asistentes.length ? `<div class="chipsN">${r.asistentes.map(a => `<span>${esc(a)}</span>`).join("")}</div>` : ""}
+      <div class="acts">
+        <button class="act" data-link="${esc(r.id)}" data-n="${esc(r.nombre)}">Copiar enlace</button>
+        <button class="act" data-cupos="${esc(r.id)}" data-n="${esc(r.nombre)}" data-v="${r.cupos || 1}">${r.cupos ? "Cambiar cupos" : "Asignar cupos"}</button>
+        ${r.estado !== "pendiente" ? `<button class="act" data-reset="${esc(r.id)}" data-n="${esc(r.nombre)}">Borrar respuesta</button>` : ""}
+        <button class="del" data-quitar="${esc(r.id)}" data-n="${esc(r.nombre)}">Quitar</button>
+      </div>
+    </div>`).join("") : `<p class="empty">${DATA.invitados.length ? "No hay resultados." : "Aún no hay invitados. Agrégalos arriba o en la pestaña Invitados de tu hoja."}</p>`;
+}
+function attendees(){
+  const out = [];
+  DATA.invitados.filter(r => r.estado === "si").forEach(r => r.asistentes.forEach(a => out.push({ nombre: a, inv: r.nombre, celular: r.celular })));
+  return out.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+}
+function renderA(){
+  const all = attendees(), q = $("#qa").value.trim().toLowerCase();
+  const rows = all.filter(a => !q || a.nombre.toLowerCase().includes(q) || a.inv.toLowerCase().includes(q));
+  $("#aCount").textContent = `${all.length} ${all.length === 1 ? "persona confirmada" : "personas confirmadas"}`;
+  $("#aList").innerHTML = rows.length ? rows.map(a => `<div class="item"><div class="r1"><span class="name">${esc(a.nombre)}</span></div><div class="meta"><span>Invitación de ${esc(a.inv)}</span></div></div>`).join("") : `<p class="empty">Aún no hay asistentes confirmados.</p>`;
+}
+function renderM(){
+  $("#mList").innerHTML = DATA.mensajes.length ? DATA.mensajes.map(m => `
+    <div class="item ${m.visible ? "" : "hidden-msg"}">
+      <div class="r1"><span class="name">${esc(m.nombre)}</span><span style="color:var(--soft);font-size:.88rem">${when(m.fecha)}</span></div>
+      <div class="msg">“${esc(m.mensaje)}”</div>
+      <div class="acts"><button class="act" data-vis="${esc(m.id)}" data-v="${m.visible ? 0 : 1}">${m.visible ? "Ocultar" : "Mostrar"}</button><button class="del" data-delmsg="${esc(m.id)}" data-n="${esc(m.nombre)}">Borrar</button></div>
+    </div>`).join("") : `<p class="empty">Aún no hay mensajes en el libro.</p>`;
+}
+function renderG(){
+  const icon = i => i === "diaper" ? "🧷" : i === "wipes" ? "🧻" : esc(i);
+  $("#gList").innerHTML = DATA.gifts.map(g => {
+    const full = g.cantidad > 0 && g.elegidos >= g.cantidad;
+    return `<div class="item gift"><div class="r1"><span class="ic" aria-hidden="true">${icon(g.icon)}</span>
+      <div style="flex:1;min-width:0"><span class="name">${esc(g.nombre)}</span>${full ? '<span class="done-tag">Elegido ✓</span>' : ""}
+        <div class="meta"><span>${g.cantidad ? `${g.elegidos} de ${g.cantidad} elegidos` : `${g.elegidos} avisaron (sin límite)`}</span></div>
+        ${g.cantidad ? `<div class="gbar"><i style="width:${Math.min(100, g.elegidos / g.cantidad * 100)}%"></i></div>` : ""}</div></div>
+      ${g.quienes.length ? `<ul class="who">${g.quienes.map(w => `<li><span>${esc(w.invitado)} <span style="color:var(--soft)">· ${when(w.fecha)}</span></span><button class="del" data-free="${esc(w.id)}" data-n="${esc(w.invitado)}" data-g="${esc(g.nombre)}">Liberar</button></li>`).join("")}</ul>` : ""}</div>`;
+  }).join("");
+}
+
+async function act(body, okMsg){
+  try { const d = await post(body); if (d.ok){ DATA = d; render(); if (okMsg) toast(okMsg); return true; } toast(d.error === "nombre" ? "Escribe un nombre" : "No se pudo guardar"); }
+  catch(_){ toast("No se pudo conectar"); }
+  return false;
+}
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault(); KEY = $("#keyIn").value.trim(); if (!KEY) return;
+  $("#loginErr").hidden = true;
+  const ok = await load();
+  if (ok){ ls.set("olivia-admin-key", KEY); show("panel"); start(); }
+  else if ($("#loginErr").hidden){ $("#loginErr").textContent = "No se pudo conectar con la hoja."; $("#loginErr").hidden = false; }
+});
+$("#logoutBtn").addEventListener("click", () => { ls.del("olivia-admin-key"); KEY = ""; stop(); $("#keyIn").value = ""; show("login"); });
+$("#refreshBtn").addEventListener("click", () => load());
+$("#q").addEventListener("input", () => DATA && renderI());
+$("#qa").addEventListener("input", () => DATA && renderA());
+$("#seg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; filtro = b.dataset.f;
+  document.querySelectorAll("#seg button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderI(); });
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => { x.setAttribute("aria-selected", x === t); $("#" + x.dataset.p).hidden = x !== t; });
+}));
+$("#addForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const nombre = $("#addName").value.trim(), cupos = parseInt($("#addCupos").value, 10) || 1;
+  if (!nombre){ $("#addName").focus(); return; }
+  if (await act({ action: "agregarInvitado", nombre, cupos }, `Agregado: ${nombre} (${cupos})`)){ $("#addName").value = ""; $("#addName").focus(); }
+});
+$("#showCupos").addEventListener("change", async e => {
+  const v = e.target.checked; e.target.disabled = true;
+  const ok = await act({ action: "config", mostrarCupos: v }, v ? "Ahora los invitados ven los lugares disponibles" : "El contador quedó oculto para los invitados");
+  if (!ok) e.target.checked = !v; e.target.disabled = false;
+});
+$("#capSave").addEventListener("click", async () => { const v = parseInt($("#capIn").value, 10); if (!(v > 0)) { toast("Escribe un número válido"); return; } await act({ action: "config", capacidad: v }, `Aforo: ${v} personas`); });
+$("#cierreSave").addEventListener("click", async () => { const v = $("#cierreIn").value; if (!v) { toast("Elige una fecha"); return; } await act({ action: "config", cierre: v }, "Fecha de cierre guardada"); });
+$("#albumSave").addEventListener("click", async () => {
+  const v = $("#albumIn").value.trim();
+  if (v && !/^https?:\/\//i.test(v)) { toast("El enlace debe empezar con https://"); return; }
+  await act({ action: "config", albumUrl: v }, v ? "Enlace del álbum publicado en la invitación" : "Enlace del álbum quitado");
+});
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-link],[data-cupos],[data-reset],[data-quitar],[data-free],[data-vis],[data-delmsg]"); if (!t) return;
+  if (t.dataset.link){
+    const url = personalLink(t.dataset.link);
+    try { await navigator.clipboard.writeText(url); toast(`Enlace de ${t.dataset.n} copiado`); } catch(_){ prompt("Copia este enlace:", url); }
+  } else if (t.dataset.cupos){
+    const v = prompt(`¿Cuántos cupos tiene ${t.dataset.n}?`, t.dataset.v || "1"); if (v === null) return;
+    const n = parseInt(v, 10); if (!(n > 0)) { toast("Escribe un número válido"); return; }
+    act({ action: "cambiarCupos", id: t.dataset.cupos, cupos: n }, `${t.dataset.n}: ${n} cupos`);
+  } else if (t.dataset.reset){
+    if (confirm(`¿Borrar la respuesta de ${t.dataset.n}? Volverá a quedar pendiente.`)) act({ action: "borrarRespuesta", id: t.dataset.reset }, "Respuesta borrada");
+  } else if (t.dataset.quitar){
+    if (confirm(`¿Quitar a ${t.dataset.n} de la lista de invitados?`)) act({ action: "quitarInvitado", id: t.dataset.quitar }, "Invitado quitado");
+  } else if (t.dataset.free){
+    if (confirm(`¿Liberar "${t.dataset.g}" elegido por ${t.dataset.n}? Volverá a aparecer en la lista.`)) act({ action: "liberarRegalo", id: t.dataset.free }, "Regalo liberado");
+  } else if (t.dataset.vis){
+    act({ action: "mostrarMensaje", id: t.dataset.vis, visible: t.dataset.v === "1" }, t.dataset.v === "1" ? "Mensaje visible" : "Mensaje oculto");
+  } else if (t.dataset.delmsg){
+    if (confirm(`¿Borrar el mensaje de ${t.dataset.n}?`)) act({ action: "borrarMensaje", id: t.dataset.delmsg }, "Mensaje borrado");
+  }
+});
+$("#csvBtn").addEventListener("click", () => {
+  if (!DATA) return;
+  const q = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const rows = [["Asistente", "Invitación de", "Celular"]].concat(attendees().map(a => [a.nombre, a.inv, a.celular]));
+  const csv = "\ufeff" + rows.map(r => r.map(q).join(";")).join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  a.download = "asistentes-olivia-fest.csv"; document.body.appendChild(a); a.click(); a.remove();
+});
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && KEY && DATA) load(true); });
+
+(async function(){
+  if (!CONFIG.api){ show("login"); $("#noApi").hidden = false; return; }
+  if (KEY){ show("panel"); const ok = await load(); if (ok) start(); }
+  else show("login");
+})();
+</script>
+</body>
+</html>
