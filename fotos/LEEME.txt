@@ -3,4 +3,5 @@ Fotos de la invitación (formato .jpg, ideal 1200 px de ancho y menos de 1 MB ca
 Álbum del libro (12 meses):  mes1.jpg ... mes12.jpg
 Nuestra princesa:            olivia1.jpg ... olivia10.jpg  (las que tengas)
 Nuestra familia:             familia1.jpg ... familia8.jpg (las que tengas)
+Fotos de los regalos:        carpeta regalos (ver fotos/regalos/LEEME.txt)
 Imagen al compartir:         portada.jpg (ya está lista)

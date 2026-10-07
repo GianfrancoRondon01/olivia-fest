@@ -125,14 +125,19 @@ a{color:var(--rose-deep)}
 .intro.done .album-ui{opacity:1;pointer-events:auto}
 .nav{width:46px;height:46px;border-radius:50%;border:1.6px solid var(--gold-soft);background:rgba(255,255,255,.75);color:#A85A6C;font-size:1.6rem;line-height:1;cursor:pointer;display:grid;place-content:center;box-shadow:0 8px 16px -10px rgba(110,50,60,.6)}
 .nav[disabled]{opacity:.35;cursor:default}
-.album-btn{min-width:56cqw;max-width:270px;padding:12px 18px;border-radius:999px;border:0;cursor:pointer;color:#fff;font-weight:700;font-size:1.08rem;background:var(--btn);box-shadow:0 12px 22px -12px rgba(150,80,95,.9)}
+.album-btn{min-width:54cqw;max-width:260px;padding:16px 22px;border-radius:999px;border:0;cursor:pointer;color:#fff;font-weight:700;font-size:1.3rem;background:var(--btn);box-shadow:0 12px 22px -12px rgba(150,80,95,.9)}
+.nav-txt{padding:15px 18px;border-radius:999px;border:1.6px solid var(--gold-soft);background:rgba(255,255,255,.85);color:#A85A6C;font-weight:700;font-size:1.12rem;cursor:pointer;box-shadow:0 8px 16px -10px rgba(110,50,60,.6)}
+.nav-txt[disabled]{opacity:.35;cursor:default}
+.album-cap{margin:-1cqw 0 0;min-height:1.4em;font-size:1.1rem;font-weight:700;color:#9C7728;font-style:italic}
 .intro.done .album-btn.pulse{animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 8px rgba(201,130,143,.18),0 12px 22px -12px rgba(150,80,95,.9)}}
 .adots{display:flex;gap:6px;justify-content:center;opacity:0;transition:opacity .6s}
 .intro.done .adots{opacity:1}
 .adots i{width:7px;height:7px;border-radius:99px;background:#E3C7C4;transition:all .3s}
 .adots i.on{width:22px;background:#C9A24E}
-.album-hint{margin:-2cqw 0 0;font-size:.95rem;font-style:italic;color:#866870;opacity:0;transition:opacity .6s}
+.album-hint{margin:0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:1.28rem;font-weight:700;color:#5A3A42;opacity:0;transition:opacity .6s}
+.hand{display:inline-block;font-size:1.7rem;animation:sway 1.6s ease-in-out infinite}
+@keyframes sway{50%{transform:translateX(-12px)}}
 .intro.done .album-hint{opacity:1}
 .cue{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:2px;color:#A85A6C;text-decoration:none;font-weight:700;font-size:1.05rem;opacity:0}
 .intro.done .cue{animation:fadeUp .9s .5s forwards}
@@ -162,6 +167,15 @@ a{color:var(--rose-deep)}
   -webkit-text-stroke:1.2px #C29A45;filter:drop-shadow(0 2px 0 #fff) drop-shadow(0 7px 12px rgba(150,80,95,.3))}
 .sub{display:flex;align-items:center;justify-content:center;gap:2.5cqw;margin:-.5cqw 0 0;font-style:italic;font-weight:700;color:#A85A6C;font-size:4.5cqw;letter-spacing:.03em}
 .sub svg{width:13cqw;height:2.4cqw;color:#C9A24E}
+
+/* carruaje real */
+.carriage-band{position:relative;text-align:center;padding:4px 0 0;background:radial-gradient(60% 55% at 50% 58%,rgba(255,244,214,.9),transparent 72%)}
+.carriage{max-width:380px;margin:0 auto}
+.carriage.small{max-width:230px}
+.carriage svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 10px 10px rgba(120,60,70,.18))}
+.wheel{transform-box:fill-box;transform-origin:50% 50%;animation:spin 9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.car-cap{font-family:var(--script);font-size:1.9rem;line-height:1.1;color:var(--rose-deep);margin:0;text-shadow:0 1px 0 rgba(255,255,255,.9)}
 
 /* ================= MARIPOSAS REALISTAS ================= */
 .bf{overflow:visible;filter:drop-shadow(0 5px 4px rgba(90,50,40,.25))}
@@ -382,17 +396,6 @@ input:focus,textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 
 .presence{font-size:1.2rem;line-height:1.55;margin:0 auto 18px;max-width:30ch}
 .presence b{color:var(--rose-deep)}
 
-/* libro de mensajes */
-.gb-list{display:grid;gap:12px;margin-top:20px;text-align:left}
-.gb{position:relative;background:var(--tex),#FFFEFA;border:1px solid var(--line);border-radius:18px;padding:14px 16px 12px;box-shadow:0 12px 20px -16px rgba(110,60,70,.6)}
-:root[data-theme="dark"] .gb{background:var(--paper)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gb{background:var(--paper)}}
-.gb .h{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.gb b{font-size:1.15rem}
-.gb time{font-size:.9rem;color:var(--ink-soft);flex:none}
-.gb p{margin:4px 0 0;font-size:1.15rem;line-height:1.5;font-style:italic}
-.gb::before{content:"“";position:absolute;right:12px;bottom:-14px;font-family:var(--script);font-size:4rem;color:rgba(201,162,78,.3);line-height:1}
-
 /* álbum de la fiesta */
 .camera{font-size:44px;line-height:1;margin:0 0 6px}
 
@@ -412,9 +415,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 
 .seal svg{width:36px;height:27px}
 
 /* pie con castillo */
-footer{position:relative;text-align:center;padding:68cqw 20px 56px;margin-top:24px;overflow:hidden}
-.f-bg{position:absolute;inset:0;background-size:118% auto;background-position:50% 10%;background-repeat:no-repeat;opacity:.78;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 52%,transparent 84%);mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 52%,transparent 84%)}
+footer{position:relative;text-align:center;padding:100cqw 20px 56px;margin-top:24px;overflow:hidden}
+.f-bg{position:absolute;inset:0;background-size:118% auto;background-position:50% 4%;background-repeat:no-repeat;opacity:.78;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 56%,transparent 80%);mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 56%,transparent 80%)}
 .f-wash{position:absolute;inset:0;background:radial-gradient(95% 44% at 50% 80%,var(--bg) 42%,transparent 82%),linear-gradient(to bottom,var(--bg),transparent 14%)}
 .f-fx{position:absolute;inset:0;pointer-events:none}
 .f-fx>*{position:absolute}
@@ -447,8 +450,9 @@ footer .hearts svg{width:14px;height:13px}
 .group>h2{font-family:var(--script);font-weight:400;font-size:2.3rem;line-height:1.1;color:var(--rose-deep);margin:0 0 2px;text-align:center}
 .group>p{text-align:center;color:var(--ink-soft);font-style:italic;margin:0 0 12px}
 .gift-list{display:grid;gap:12px}
-.gift{display:grid;grid-template-columns:62px 1fr;gap:4px 14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:0 12px 22px -20px rgba(120,50,70,.7)}
-.gift .gi{width:62px;height:62px;border-radius:50%;display:grid;place-content:center;font-size:30px;grid-row:span 2;background:radial-gradient(circle at 35% 30%,#fff,#FBEDEF 60%,#F1CDD4)}
+.gift{display:grid;grid-template-columns:78px 1fr;gap:4px 14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:0 12px 22px -20px rgba(120,50,70,.7)}
+.gift .gi{position:relative;overflow:hidden;width:78px;height:78px;border-radius:22px;display:grid;place-content:center;font-size:34px;grid-row:span 2;background:radial-gradient(circle at 35% 30%,#fff,#FBEDEF 60%,#F1CDD4);box-shadow:0 0 0 2px var(--gold-soft)}
+.gift .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .gift .gi svg{width:40px;height:32px}
 .gift h3{margin:0;font-size:1.16rem;line-height:1.2}
 .gift .d{color:var(--ink-soft);font-size:.98rem;line-height:1.3}
@@ -493,6 +497,8 @@ dialog .row .btn{flex:1;padding:11px 10px}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <defs>
   <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8E6AE"/><stop offset=".5" stop-color="#D6AE55"/><stop offset="1" stop-color="#B08A3A"/></linearGradient>
+  <linearGradient id="carBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1F3"/><stop offset=".5" stop-color="#F2BAC6"/><stop offset="1" stop-color="#CF8497"/></linearGradient>
+  <linearGradient id="carGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8DC"/><stop offset=".6" stop-color="#FFDB8C"/><stop offset="1" stop-color="#F0B062"/></linearGradient>
   <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D3E3C3"/><stop offset="1" stop-color="#8CAD86"/></linearGradient>
   <linearGradient id="bodyG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3E2726"/><stop offset=".5" stop-color="#7A5553"/><stop offset="1" stop-color="#3E2726"/></linearGradient>
   <radialGradient id="wg-pink" cx="0" cy=".5" r="1.05"><stop offset="0" stop-color="#FFF4F1"/><stop offset=".35" stop-color="#F8CCD5"/><stop offset=".72" stop-color="#E39AAA"/><stop offset="1" stop-color="#AF5C70"/></radialGradient>
@@ -598,7 +604,6 @@ dialog .row .btn{flex:1;padding:11px 10px}
   <section class="intro" id="intro" aria-label="Érase una vez">
     <div class="sky" id="introSky" aria-hidden="true"></div>
     <button class="replay" id="replay" type="button">↻ Volver a leer</button>
-    <p class="intro-kicker">Érase una vez…</p>
     <div class="book" id="book" role="group" tabindex="0" aria-label="Libro de cuento y álbum de fotos. Desliza o usa las flechas para pasar las páginas.">
       <div class="book-shadow"></div>
       <div class="edgeL" id="pileL"></div>
@@ -613,12 +618,12 @@ dialog .row .btn{flex:1;padding:11px 10px}
       <div id="leaves"></div>
     </div>
     <div class="album-ui">
-      <button class="nav" id="prevBtn" type="button" aria-label="Página anterior">‹</button>
-      <button class="album-btn pulse" id="albumBtn" type="button">📖 Hojear mi álbum</button>
-      <button class="nav" id="nextBtn" type="button" aria-label="Página siguiente">›</button>
+      <button class="nav-txt" id="prevBtn" type="button" aria-label="Página anterior">‹ Atrás</button>
+      <button class="album-btn pulse" id="albumBtn" type="button">Pasar la página ›</button>
     </div>
     <div class="adots" id="adots" aria-hidden="true"></div>
-    <p class="album-hint">Desliza las páginas con el dedo, como un libro</p>
+    <p class="album-cap" id="albumCap" aria-live="polite"></p>
+    <p class="album-hint"><span class="hand" aria-hidden="true">👈</span> Desliza el libro con el dedo</p>
     <a class="cue" href="#reino">Entra al reino de Olivia
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
@@ -684,6 +689,103 @@ dialog .row .btn{flex:1;padding:11px 10px}
     </div>
   </section>
 
+  <!-- ======= LUGARES DISPONIBLES (solo si lo activas en el panel) ======= -->
+  <section class="sec" id="cuposSec" hidden>
+    <div class="panel cupos">
+      <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Lugares en el reino</h2></div>
+      <p class="num" id="cuposNum">100</p>
+      <p style="margin:0;font-weight:600">lugares disponibles</p>
+      <div class="bar"><i id="cuposBar"></i></div>
+      <p class="hint" id="cuposTxt"></p>
+    </div>
+  </section>
+
+  <!-- ======= CONFIRMACIÓN NOMBRE POR NOMBRE ======= -->
+  <section class="sec" id="confirmar">
+    <div class="panel">
+      <svg class="corner tl" aria-hidden="true"><use href="#bouquet"/></svg>
+      <svg class="corner br" aria-hidden="true"><use href="#bouquet"/></svg>
+      <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Confirma tu asistencia</h2></div>
+      <p class="deadline" id="deadline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Con cariño, te pedimos confirmar hasta el 14 de octubre<span id="dLeft"></span></span></p>
+
+      <p class="closed-note" id="closedNote" hidden>Las confirmaciones cerraron el 14 de octubre. ¡Gracias por tanto cariño! 💗</p>
+
+      <form id="rsvp" novalidate>
+        <p class="full-note" id="fullNote" hidden>Ya no quedan lugares disponibles en el reino. ¡Gracias por tu comprensión!</p>
+        <div>
+          <label for="buscar">Tu nombre y apellido</label>
+          <div class="combo">
+            <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+            <input type="text" id="buscar" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="matches" autocomplete="name" maxlength="80" placeholder="Escribe tu nombre">
+          </div>
+          <ul class="matches" id="matches" role="listbox" aria-label="Invitados" hidden></ul>
+          <p class="hint" id="findHint" hidden></p>
+        </div>
+
+        <div class="welcome" id="welcome" hidden>
+          <svg class="st twinkle" style="left:14px;top:12px"><use href="#star4"/></svg>
+          <svg class="st twinkle" style="right:16px;top:20px;animation-delay:-1s"><use href="#star4"/></svg>
+          <svg class="st twinkle" style="right:40px;bottom:12px;animation-delay:-1.8s"><use href="#star4"/></svg>
+          <b id="welName"></b><span id="welSub"></span>
+        </div>
+
+        <div id="answerBox" style="display:grid;gap:18px">
+        <fieldset>
+          <legend>¿Nos acompañarás?</legend>
+          <div class="choice">
+            <input type="radio" name="asiste" id="si" value="si" checked><label for="si">Sí, ahí estaré</label>
+            <input type="radio" name="asiste" id="no" value="no"><label for="no">No podré ir</label>
+          </div>
+        </fieldset>
+
+        <div id="goingBox" style="display:grid;gap:18px">
+          <fieldset id="peopleFs">
+            <legend id="peopleLegend">¿Cuántas personas asistirán? (contándote)</legend>
+            <div class="people" id="people" role="group" aria-labelledby="peopleLegend"></div>
+          </fieldset>
+          <fieldset id="namesFs">
+            <legend>Nombre de cada asistente</legend>
+            <div class="names" id="names"></div>
+            <p class="hint">Escribe nombre y apellido de cada persona; así preparamos un pase real para cada una.</p>
+          </fieldset>
+          <div>
+            <label for="celular">Tu celular <span class="opt">(opcional)</span></label>
+            <input type="tel" id="celular" autocomplete="tel" maxlength="20" placeholder="Ej. 987 654 321">
+          </div>
+        </div>
+        <p class="error" id="errForm" hidden></p>
+        <button class="btn solid" id="rsvpBtn" type="submit" style="width:100%">👑 Confirmar asistencia</button>
+        </div>
+        <p class="demo-note" id="demoNote" hidden>Vista previa: aquí la confirmación no se guarda.</p>
+      </form>
+
+      <div class="sent" id="sent" hidden tabindex="-1">
+        <p class="big" id="sentTitle">¡Gracias!</p>
+        <p class="status" id="sentStatus"></p>
+        <div class="pass" id="pass">
+          <div class="pass-in">
+            <svg class="cr" viewBox="0 0 40 30" aria-hidden="true"><use href="#crown"/></svg>
+            <p class="k">PASE REAL</p>
+            <h3>Olivia Fest</h3>
+            <p class="s">Primer añito de Olivia</p>
+            <ul id="passNames"></ul>
+            <p class="meta">Sábado 17 de octubre · 3:00 p.m.<br>Los Laureles, Cerro Colorado</p>
+            <p class="note">Presenta este pase en la entrada del reino</p>
+          </div>
+        </div>
+        <div class="btns" id="passBtns">
+          <button class="btn solid" id="savePass" type="button">⬇ Guardar mi pase</button>
+        </div>
+        <p style="margin:12px 0 0"><button type="button" class="linkbtn" id="editRsvp">Cambiar mi respuesta</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= CARRUAJE REAL ======= -->
+  <section class="sec" style="padding-top:6px;padding-bottom:10px">
+    <div class="carriage-band"><div class="carriage"></div><p class="car-cap">Un carruaje de cuento para nuestra princesa</p></div>
+  </section>
+
   <!-- ======= DÓNDE: mapa ======= -->
   <section class="sec">
     <div class="panel">
@@ -729,8 +831,8 @@ dialog .row .btn{flex:1;padding:11px 10px}
           <path d="M0 6Q200 46 400 6" stroke="#fff" stroke-width="2" stroke-dasharray="3 6" fill="none" opacity=".8"/>
         </svg>
         <ol class="tags">
-          <li class="tag"><svg class="bow"><use href="#bow"/></svg><div class="t"><time>3:00 pm</time><span class="emo">🎀</span><h3>Bienvenida</h3></div></li>
-          <li class="tag"><svg class="bow"><use href="#bow"/></svg><div class="t"><time>4:00 pm</time><span class="emo">🥂</span><h3>Palabras de bienvenida</h3></div></li>
+          <li class="tag"><svg class="bow"><use href="#bow"/></svg><div class="t"><time>3:00 pm</time><span class="emo">🚪</span><h3>Apertura de puertas</h3></div></li>
+          <li class="tag"><svg class="bow"><use href="#bow"/></svg><div class="t"><time>4:00 pm</time><span class="emo">🥂</span><h3>Inicio de ceremonia</h3></div></li>
           <li class="tag"><svg class="bow"><use href="#bow"/></svg><div class="t"><time>5:00 pm</time><span class="emo">🎪</span><h3>Show infantil</h3></div></li>
         </ol>
       </div>
@@ -759,96 +861,6 @@ dialog .row .btn{flex:1;padding:11px 10px}
     </div>
   </section>
 
-  <!-- ======= LUGARES DISPONIBLES (solo si lo activas en el panel) ======= -->
-  <section class="sec" id="cuposSec" hidden>
-    <div class="panel cupos">
-      <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Lugares en el reino</h2></div>
-      <p class="num" id="cuposNum">100</p>
-      <p style="margin:0;font-weight:600">lugares disponibles</p>
-      <div class="bar"><i id="cuposBar"></i></div>
-      <p class="hint" id="cuposTxt"></p>
-    </div>
-  </section>
-
-  <!-- ======= CONFIRMACIÓN NOMBRE POR NOMBRE ======= -->
-  <section class="sec" id="confirmar">
-    <div class="panel">
-      <svg class="corner tl" aria-hidden="true"><use href="#bouquet"/></svg>
-      <svg class="corner br" aria-hidden="true"><use href="#bouquet"/></svg>
-      <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Confirma tu asistencia</h2></div>
-      <p class="deadline" id="deadline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Con cariño, te pedimos confirmar hasta el 14 de octubre<span id="dLeft"></span></span></p>
-
-      <p class="closed-note" id="closedNote" hidden>Las confirmaciones cerraron el 14 de octubre. ¡Gracias por tanto cariño! 💗</p>
-
-      <form id="rsvp" novalidate>
-        <p class="full-note" id="fullNote" hidden>Ya no quedan lugares disponibles en el reino. ¡Gracias por tu comprensión!</p>
-        <div>
-          <label for="buscar">Tu nombre y apellido</label>
-          <div class="combo">
-            <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-            <input type="text" id="buscar" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="matches" autocomplete="name" maxlength="80" placeholder="Escribe tu nombre">
-          </div>
-          <ul class="matches" id="matches" role="listbox" aria-label="Invitados" hidden></ul>
-          <p class="hint" id="findHint" hidden></p>
-        </div>
-
-        <div class="welcome" id="welcome" hidden>
-          <svg class="st twinkle" style="left:14px;top:12px"><use href="#star4"/></svg>
-          <svg class="st twinkle" style="right:16px;top:20px;animation-delay:-1s"><use href="#star4"/></svg>
-          <svg class="st twinkle" style="right:40px;bottom:12px;animation-delay:-1.8s"><use href="#star4"/></svg>
-          <b id="welName"></b><span id="welSub"></span>
-        </div>
-
-        <fieldset>
-          <legend>¿Nos acompañarás?</legend>
-          <div class="choice">
-            <input type="radio" name="asiste" id="si" value="si" checked><label for="si">Sí, ahí estaré</label>
-            <input type="radio" name="asiste" id="no" value="no"><label for="no">No podré ir</label>
-          </div>
-        </fieldset>
-
-        <div id="goingBox" style="display:grid;gap:18px">
-          <fieldset>
-            <legend id="peopleLegend">¿Cuántas personas asistirán? (contándote)</legend>
-            <div class="people" id="people" role="group" aria-labelledby="peopleLegend"></div>
-          </fieldset>
-          <fieldset>
-            <legend>Nombre de cada asistente</legend>
-            <div class="names" id="names"></div>
-            <p class="hint">Escribe nombre y apellido de cada persona; así preparamos un pase real para cada una.</p>
-          </fieldset>
-          <div>
-            <label for="celular">Tu celular <span class="opt">(opcional)</span></label>
-            <input type="tel" id="celular" autocomplete="tel" maxlength="20" placeholder="Ej. 987 654 321">
-          </div>
-        </div>
-        <p class="error" id="errForm" hidden></p>
-        <button class="btn solid" id="rsvpBtn" type="submit" style="width:100%">👑 Confirmar asistencia</button>
-        <p class="demo-note" id="demoNote" hidden>Vista previa: aquí la confirmación no se guarda.</p>
-      </form>
-
-      <div class="sent" id="sent" hidden tabindex="-1">
-        <p class="big" id="sentTitle">¡Gracias!</p>
-        <p class="status" id="sentStatus"></p>
-        <div class="pass" id="pass">
-          <div class="pass-in">
-            <svg class="cr" viewBox="0 0 40 30" aria-hidden="true"><use href="#crown"/></svg>
-            <p class="k">PASE REAL</p>
-            <h3>Olivia Fest</h3>
-            <p class="s">Primer añito de Olivia</p>
-            <ul id="passNames"></ul>
-            <p class="meta">Sábado 17 de octubre · 3:00 p.m.<br>Los Laureles, Cerro Colorado</p>
-            <p class="note">Presenta este pase en la entrada del reino</p>
-          </div>
-        </div>
-        <div class="btns" id="passBtns">
-          <button class="btn solid" id="savePass" type="button">⬇ Guardar mi pase</button>
-        </div>
-        <p style="margin:12px 0 0"><button type="button" class="linkbtn" id="editRsvp">Cambiar mi respuesta</button> · <a class="linkbtn" href="#libro">Dejar un mensaje</a></p>
-      </div>
-    </div>
-  </section>
-
   <!-- ======= REGALOS (resumen) ======= -->
   <section class="sec" id="ideas">
     <div class="panel">
@@ -862,24 +874,6 @@ dialog .row .btn{flex:1;padding:11px 10px}
         <div class="bubble"><div class="b">👗</div><span>Ropita</span></div>
       </div>
       <a class="btn solid" href="#regalos" style="width:100%">🎁 Ver ideas y elegir</a>
-    </div>
-  </section>
-
-  <!-- ======= LIBRO DE MENSAJES ======= -->
-  <section class="sec" id="libro">
-    <div class="panel">
-      <svg class="corner tr" aria-hidden="true"><use href="#bouquet"/></svg>
-      <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Libro de mensajes</h2><svg class="orn" viewBox="0 0 120 20"><use href="#flourish"/></svg></div>
-      <p class="lead">Déjale unas palabras a Olivia. Las guardaremos para leérselas cuando crezca.</p>
-      <form id="gbForm" novalidate>
-        <div><label for="gbName">Tu nombre</label><input type="text" id="gbName" maxlength="60" autocomplete="name" placeholder="Ej. Tía Rosa"></div>
-        <div><label for="gbMsg">Tu mensaje</label><textarea id="gbMsg" maxlength="300" placeholder="Querida Olivia…"></textarea></div>
-        <p class="error" id="gbErr" hidden></p>
-        <button class="btn solid" id="gbBtn" type="submit" style="width:100%">✍️ Escribir en el libro</button>
-        <p class="hint" style="text-align:center;margin:0">Tu mensaje será visible para los invitados.</p>
-      </form>
-      <div class="gb-list" id="gbList"></div>
-      <p style="margin:12px 0 0"><button class="linkbtn" id="gbMore" type="button" hidden>Ver más mensajes</button></p>
     </div>
   </section>
 
@@ -934,15 +928,11 @@ dialog .row .btn{flex:1;padding:11px 10px}
 <dialog id="giftDialog">
   <h3>¡Qué lindo!</h3>
   <p class="what" id="dlgWhat"></p>
+  <p class="hint" style="text-align:center;margin:0 0 16px">Al elegirlo, desaparecerá de la lista para que nadie más lo repita.</p>
   <form method="dialog" id="dlgForm">
-    <div>
-      <label for="dlgName">Tu nombre</label>
-      <input type="text" id="dlgName" maxlength="80" autocomplete="name" placeholder="Ej. María Pérez">
-      <p class="error" id="dlgErr" hidden>Escribe tu nombre para reservar.</p>
-    </div>
     <div class="row">
       <button type="button" class="btn" id="dlgCancel">Cancelar</button>
-      <button type="submit" class="btn solid" id="dlgOk">Reservar regalo</button>
+      <button type="submit" class="btn solid" id="dlgOk">Sí, lo regalo</button>
     </div>
   </form>
 </dialog>
@@ -974,7 +964,7 @@ const CONFIG = {
 /* La frase del libro (página izquierda y derecha) */
 const CUENTO = [
   "Érase una vez una pequeña princesa que llegó para llenar nuestras vidas de magia y amor.",
-  "Hoy su reino está de fiesta para compartir la alegría de celebrar su primer añito junto a las personas que más queremos en el mundo."
+  "Hoy su reino está de fiesta para compartir la alegría de celebrar su primer añito junto a las personas que más queremos en el…"
 ];
 
 /* Regalos de respaldo (la lista real se edita en la hoja "Regalos") */
@@ -983,29 +973,20 @@ const REGALOS = [
   {id:"pan-huggies-g",cat:"panales",name:"Pañales Huggies Dermacare talla G",detail:"Paquete grande",qty:8,icon:"diaper"},
   {id:"pan-xg",cat:"panales",name:"Pañales talla XG",detail:"Babysec Súper Premium o Huggies Dermacare",qty:8,icon:"diaper"},
   {id:"panitos",cat:"panales",name:"Pañitos húmedos Huggies",detail:"Empaque verde",qty:10,icon:"wipes"},
-  {id:"jug-encajable",cat:"juguetes",name:"Encajable de formas y colores",detail:"Desarrolla la coordinación",qty:1,icon:"🔷"},
-  {id:"jug-aros",cat:"juguetes",name:"Torre de aros apilables",detail:"Para apilar por tamaños",qty:1,icon:"🌈"},
   {id:"jug-mesa",cat:"juguetes",name:"Mesa de actividades musical",detail:"Luces, sonidos y botones",qty:1,icon:"🎹"},
-  {id:"jug-correpasillos",cat:"juguetes",name:"Correpasillos o caminador de empuje",detail:"Para sus primeros pasos",qty:1,icon:"🦄"},
-  {id:"jug-libros",cat:"juguetes",name:"Libros de cartón con texturas",detail:"Páginas gruesas y resistentes",qty:2,icon:"📚"},
-  {id:"jug-xilofono",cat:"juguetes",name:"Xilófono o tambor infantil",detail:"Su primera banda musical",qty:1,icon:"🥁"},
-  {id:"jug-rompecabezas",cat:"juguetes",name:"Rompecabezas de madera con perillas",detail:"Piezas grandes y fáciles de tomar",qty:1,icon:"🧩"},
-  {id:"jug-arrastre",cat:"juguetes",name:"Juguete de arrastre para jalar",detail:"La acompaña mientras camina",qty:1,icon:"🦆"},
-  {id:"jug-muneca",cat:"juguetes",name:"Muñeca de tela o peluche suave",detail:"Lavable",qty:1,icon:"🧸"},
-  {id:"jug-crayones",cat:"juguetes",name:"Crayones jumbo y cuaderno para pintar",detail:"Crayones gruesos, no tóxicos",qty:1,icon:"🖍️"},
-  {id:"jug-bano",cat:"juguetes",name:"Juguetes para el baño",detail:"Patitos, vasitos o barquitos",qty:1,icon:"🛁"},
-  {id:"jug-pelotas",cat:"juguetes",name:"Pelotas sensoriales",detail:"Texturas y colores",qty:1,icon:"⚽"},
+  {id:"jug-libros",cat:"juguetes",name:"Libros de texturas",detail:"Para tocar y explorar con las manitos",qty:2,icon:"📚"},
+  {id:"jug-tabla",cat:"juguetes",name:"Tabla y cuchillito Montessori",detail:"Para que Olivia nos ayude a preparar la comida",qty:1,icon:"🥕"},
+  {id:"jug-torre",cat:"juguetes",name:"Torre Montessori",detail:"Para que se pare y nos acompañe a la altura de la mesa",qty:1,icon:"🏰"},
+  {id:"jug-resbaladera",cat:"juguetes",name:"Resbaladera de plástico",detail:"Con piscina o con columpio",qty:1,icon:"🎠"},
   {id:"ropa-rosado",cat:"ropa",name:"Conjunto color rosado",detail:"Talla 12 a 18 meses",qty:3,icon:"👚"},
   {id:"ropa-blanco",cat:"ropa",name:"Conjunto color blanco",detail:"Talla 12 a 18 meses",qty:2,icon:"🤍"},
   {id:"ropa-vestido",cat:"ropa",name:"Vestidito rosado o blanco",detail:"Talla 12 a 18 meses",qty:2,icon:"👗"},
   {id:"ropa-medias",cat:"ropa",name:"Mediecitas",detail:"Pack de varios pares",qty:3,icon:"🧦"},
   {id:"ropa-pijama",cat:"ropa",name:"Pijamita de algodón",detail:"Talla 12 a 18 meses",qty:2,icon:"🌙"},
   {id:"ropa-accesorios",cat:"ropa",name:"Accesorios para el cabello",detail:"Vinchas, lazos y ganchitos",qty:3,icon:"🎀"},
-  {id:"ropa-zapatitos",cat:"ropa",name:"Zapatitos de primeros pasos",detail:"Suela flexible",qty:1,icon:"🩰"},
-  {id:"ropa-chompa",cat:"ropa",name:"Chompita o casaquita",detail:"Talla 12 a 18 meses",qty:2,icon:"🧥"},
-  {id:"cui-vajilla",cat:"cuidado",name:"Vajilla infantil",detail:"Plato, vaso con asas y cubiertos",qty:1,icon:"🥣"},
-  {id:"cui-bano",cat:"cuidado",name:"Set de baño para bebé",detail:"Shampoo, jabón y crema",qty:2,icon:"🧴"},
-  {id:"cui-panalera",cat:"cuidado",name:"Mochila pañalera",detail:"Con varios bolsillos",qty:1,icon:"🎒"},
+  {id:"cui-esquineros",cat:"cuidado",name:"Esquineros de seguridad",detail:"Para proteger las esquinas de los muebles",qty:2,icon:"🛡️"},
+  {id:"cui-cierrapuertas",cat:"cuidado",name:"Cierra puertas de seguridad",detail:"Para que no se pille los deditos al caminar",qty:2,icon:"🚪"},
+  {id:"cui-vajilla",cat:"cuidado",name:"Vajilla de cerámica",detail:"Para sus primeras comidas",qty:1,icon:"🥣"},
   {id:"cui-portabebe",cat:"cuidado",name:"Asiento portabebé AÚPA",detail:"Soporte de cadera para cargarla como en brazos",qty:1,icon:"👶",url:"https://aupa.pe/products/asiento-portabebe"},
   {id:"sobres",cat:"otros",name:"Lluvia de sobres",detail:"Siempre bienvenida, no necesita reserva",qty:0,icon:"💌"}
 ];
@@ -1013,14 +994,9 @@ const GRUPOS = [
   ["panales","Pañales y pañitos","Desde talla G"],
   ["juguetes","Juguetes","Recomendados para niños desde el año y medio"],
   ["ropa","Ropita","Conjuntos en rosado y blanco, mediecitas y accesorios"],
-  ["cuidado","Para su cuidado",""],
+  ["cuidado","Para su cuidado","Para que explore con seguridad"],
   ["otros","Otros",""]
 ];
-const DEMO_MSGS = [
-  {id:"d1",nombre:"Abuelita Rosa",mensaje:"Mi princesita hermosa, que este primer añito sea el comienzo de una vida llena de amor y risas.",fecha:"2026-10-02T15:00:00-05:00"},
-  {id:"d2",nombre:"Tío Luis",mensaje:"¡Feliz primer añito, Olivia! Gracias por traer tanta alegría a la familia.",fecha:"2026-10-01T20:30:00-05:00"}
-];
-
 /* ===================== utilidades ===================== */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1033,6 +1009,7 @@ const store = {
 function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const giftPhoto = g => { const f = String(g.foto || "").trim(); if (/^https?:\/\//i.test(f)) return f; return f ? `fotos/regalos/${f.replace(/^\/+/, "")}` : `fotos/regalos/${g.id}.jpg`; };
 const safeUrl = u => /^https?:\/\//i.test(String(u || "")) ? String(u) : "";
 const firstName = n => { const t = String(n || "").trim().split(/\s+/)[0] || ""; return t ? t.charAt(0).toUpperCase() + t.slice(1).toLowerCase() : ""; };
 const tryLoad = src => new Promise(r => { const im = new Image(); im.onload = () => r(src); im.onerror = () => r(null); im.src = src; });
@@ -1090,6 +1067,41 @@ function addPetals(box, count, fy, R){
     box.appendChild(p);
   }
 }
+
+/* ===================== carruaje real ===================== */
+function carriageSVG(){
+  const spokes = (cx, cy, r) => Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return `<path d="M${cx} ${cy}L${(cx + Math.cos(a) * r).toFixed(1)} ${(cy + Math.sin(a) * r).toFixed(1)}" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>`; }).join("");
+  const wheel = (cx, cy, r) => `<g class="wheel"><circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(255,255,255,.14)" stroke="url(#gold)" stroke-width="${(r * .2).toFixed(1)}"/>
+    <circle cx="${cx}" cy="${cy}" r="${(r * .78).toFixed(1)}" fill="none" stroke="#F3E0A8" stroke-width="1.4"/>${spokes(cx, cy, r * .78)}
+    <circle cx="${cx}" cy="${cy}" r="${(r * .2).toFixed(1)}" fill="url(#gold)" stroke="#A07A2C" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="${(r * .08).toFixed(1)}" fill="#E49AAA"/></g>`;
+  const star = (x, y, k, d) => `<g transform="translate(${x} ${y}) scale(${k})" style="color:#E6C477"><g class="twinkle" style="animation-delay:-${d}s"><use href="#star4" x="-9" y="-9" width="18" height="18"/></g></g>`;
+  return `<svg viewBox="0 0 340 236" role="img" aria-label="Carruaje real de princesa con ruedas doradas sobre nubes">
+    <g><ellipse cx="170" cy="216" rx="150" ry="13" fill="#F6DEE1"/>
+      <g fill="#fff"><circle cx="46" cy="210" r="20"/><circle cx="76" cy="204" r="26"/><circle cx="112" cy="212" r="20"/><circle cx="228" cy="214" r="20"/><circle cx="262" cy="206" r="27"/><circle cx="298" cy="212" r="21"/></g>
+      <path d="M26 218H316" stroke="#F2D6DA" stroke-width="8" stroke-linecap="round"/></g>
+    <ellipse cx="172" cy="213" rx="104" ry="6" fill="rgba(110,60,70,.22)"/>
+    <g class="bob">
+      <path d="M104 182Q170 198 232 170" stroke="url(#gold)" stroke-width="6" fill="none" stroke-linecap="round"/>
+      ${wheel(232, 170, 42)}${wheel(104, 182, 30)}
+      <path d="M92 150C78 112 98 74 142 62L208 62C252 74 272 112 258 150C236 162 114 162 92 150Z" fill="url(#carBody)" stroke="url(#gold)" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M175 62C150 92 142 126 150 158M175 62C165 96 162 128 165 160M175 62C200 92 208 126 200 158M175 62C185 96 188 128 185 160" stroke="rgba(255,255,255,.6)" stroke-width="2" fill="none"/>
+      <ellipse cx="128" cy="92" rx="22" ry="9" fill="rgba(255,255,255,.4)" transform="rotate(-38 128 92)"/>
+      <path d="M156 136V104a19 19 0 0 1 38 0V136Z" fill="url(#carGlass)" stroke="url(#gold)" stroke-width="3"/>
+      <path d="M175 85V136M156 114H194" stroke="url(#gold)" stroke-width="1.4" opacity=".7"/>
+      <use href="#heart" x="166" y="140" width="18" height="17" style="color:#E49AAA"/>
+      <path d="M96 148C130 162 220 162 254 148" stroke="url(#gold)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M126 66Q175 50 224 66" stroke="url(#gold)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <use href="#crown" x="150" y="26" width="50" height="37.5"/>
+      <path d="M96 150C70 150 56 138 58 118C74 114 90 126 96 140Z" fill="url(#carBody)" stroke="url(#gold)" stroke-width="3"/>
+      <path d="M58 118C48 112 46 100 56 96" stroke="url(#gold)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M258 150C276 150 290 138 286 118C270 116 260 128 258 140Z" fill="url(#carBody)" stroke="url(#gold)" stroke-width="3"/>
+      <path d="M286 118C296 112 298 100 288 96" stroke="url(#gold)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="80" cy="100" r="14" fill="rgba(255,233,168,.45)"/><circle cx="80" cy="100" r="6" fill="#FFE9A8" stroke="url(#gold)" stroke-width="1.5"/><path d="M80 106V122" stroke="url(#gold)" stroke-width="2"/>
+    </g>
+    ${star(40, 70, 1.2, 0)}${star(300, 60, 1, 1)}${star(24, 140, .8, 1.6)}${star(318, 130, 1.1, .6)}${star(170, 14, .8, 2)}
+  </svg>`;
+}
+document.querySelectorAll(".carriage").forEach(el => { el.innerHTML = carriageSVG(); });
 
 /* ===================== INTRO: libro con cuento + álbum de 12 meses ===================== */
 const BOOK = (function(){
@@ -1161,10 +1173,10 @@ const BOOK = (function(){
   function ui(){
     const p = Math.round(pos);
     $("#prevBtn").disabled = p <= 1;
-    $("#nextBtn").disabled = p >= N;
     const b = $("#albumBtn");
     b.classList.toggle("pulse", p <= 1);
-    b.textContent = p <= 1 ? "📖 Hojear mi álbum" : (p >= N ? "Entra al reino ↓" : `Meses ${2*p - 3} y ${2*p - 2}`);
+    b.textContent = p >= N ? "Entra al reino ↓" : "Pasar la página ›";
+    $("#albumCap").textContent = p >= N ? "¡Fin del álbum!" : (p >= 2 ? `Meses ${2*p - 3} y ${2*p - 2}` : "");
     [...$("#adots").children].forEach((d, k) => d.classList.toggle("on", p === k + 2));
   }
   function goTo(target, dur = 900){
@@ -1237,7 +1249,6 @@ const BOOK = (function(){
     if (e.key === "ArrowRight"){ e.preventDefault(); next(); }
     if (e.key === "ArrowLeft"){ e.preventDefault(); prev(); }
   });
-  $("#nextBtn").addEventListener("click", next);
   $("#prevBtn").addEventListener("click", prev);
   $("#albumBtn").addEventListener("click", () => {
     if (Math.round(pos) >= N) $("#reino").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
@@ -1427,7 +1438,7 @@ renderCalendar();
 const localGuests = () => (CONFIG.invitados || []).map((g, i) => ({ id: "local-" + i, nombre: g.nombre, cupos: Number(g.cupos) || 1, r: null }));
 const state = {
   online: false, loaded: false, gifts: REGALOS.map(g => ({ ...g, taken: 0 })), guests: localGuests(),
-  messages: CONFIG.demo ? DEMO_MSGS.slice() : [], showCounter: false, capacity: 100, confirmed: 0, remaining: null,
+  showCounter: false, capacity: 100, confirmed: 0, remaining: null,
   closeAt: CONFIG.cierre, albumUrl: ""
 };
 async function api(payload){
@@ -1443,16 +1454,15 @@ async function api(payload){
 }
 function applyState(d){
   if (!d) return;
-  if (Array.isArray(d.gifts) && d.gifts.length) state.gifts = d.gifts.map(g => ({ id: String(g.id), cat: g.cat || "otros", name: g.name, detail: g.detail || "", qty: Number(g.qty) || 0, icon: g.icon || "🎁", url: g.url || "", taken: Number(g.taken) || 0 }));
+  if (Array.isArray(d.gifts) && d.gifts.length) state.gifts = d.gifts.map(g => ({ id: String(g.id), cat: g.cat || "otros", name: g.name, detail: g.detail || "", qty: Number(g.qty) || 0, icon: g.icon || "🎁", url: g.url || "", foto: g.foto || "", taken: Number(g.taken) || 0 }));
   if (Array.isArray(d.guests)) state.guests = d.guests.map(g => ({ id: String(g.id), nombre: String(g.nombre), cupos: Number(g.cupos) || 0, r: g.r || null }));
-  if (Array.isArray(d.messages)) state.messages = d.messages;
   if ("showCounter" in d) state.showCounter = !!d.showCounter;
   if ("capacity" in d) state.capacity = Number(d.capacity) || 100;
   if ("confirmed" in d) state.confirmed = Number(d.confirmed) || 0;
   if ("remaining" in d) state.remaining = Number(d.remaining);
   if (d.closeAt) state.closeAt = d.closeAt;
   if ("albumUrl" in d) state.albumUrl = safeUrl(d.albumUrl);
-  renderCupos(); renderGifts(); renderAlbum(); GB.render(); RSVP.sync(); renderCalendar(state.closeAt);
+  renderCupos(); renderGifts(); renderAlbum(); RSVP.sync(); renderCalendar(state.closeAt);
 }
 async function refresh(){
   try { const d = await api(); if (d && d.ok){ state.online = true; applyState(d); } }
@@ -1483,7 +1493,13 @@ const RSVP = (function(){
   if (!CONFIG.api) $("#demoNote").hidden = false;
 
   const isClosed = () => Date.now() > new Date(state.closeAt || CONFIG.cierre).getTime();
-  const maxFor = () => guest ? (guest.cupos || CONFIG.maxSinLista) : CONFIG.maxSinLista;
+  const strict = () => state.guests.length > 0;   // con lista cargada, solo confirman los invitados de la lista
+  const maxFor = () => guest ? (guest.cupos || 1) : CONFIG.maxSinLista;
+  const hint = msg => { const h = $("#findHint"); h.textContent = msg || ""; h.hidden = !msg; };
+  function gate(){
+    $("#answerBox").hidden = strict() && !guest;
+    hint(strict() && !guest ? "Escribe tu nombre o apellido y elígelo de la lista." : "");
+  }
   const going = () => form.querySelector('input[name="asiste"]:checked').value === "si";
 
   function deadline(){
@@ -1495,7 +1511,10 @@ const RSVP = (function(){
     if (closed){ form.hidden = true; if (lastResponse) showSent(lastResponse, ""); }
   }
   function renderPeople(){
-    const max = maxFor(); personas = Math.min(Math.max(1, personas), max);
+    const max = Math.max(1, maxFor()); personas = Math.min(Math.max(1, personas), max);
+    $("#peopleFs").hidden = !!guest && max === 1;
+    $("#namesFs").hidden = !!guest && max === 1;
+    $("#peopleLegend").textContent = guest ? `Tu invitación incluye ${max} pases: ¿cuántos usarás?` : "¿Cuántas personas asistirán? (contándote)";
     $("#people").innerHTML = Array.from({ length: max }, (_, k) => {
       const i = k + 1, all = guest && i === max && max > 1;
       return `<button type="button" data-n="${i}" class="${all ? "all" : ""}" aria-pressed="${i === personas}">${all ? `${i}<small>Todos</small>` : i}</button>`;
@@ -1513,13 +1532,15 @@ const RSVP = (function(){
     box.querySelector("input").addEventListener("input", () => { firstTouched = true; });
   }
   function welcome(){
+    if (strict() && !guest){ $("#welcome").hidden = true; return; }
     const name = guest ? guest.nombre : input.value.trim();
     const fn = firstName(name);
     if (!fn || fn.length < 2){ $("#welcome").hidden = true; return; }
     $("#welName").textContent = `¡Te damos la bienvenida al reino, ${fn}!`;
+    const n = guest ? guest.cupos : 0;
     $("#welSub").textContent = guest
-      ? (guest.r ? (guest.r.asiste ? `Ya confirmaste ${guest.r.personas} de ${guest.cupos} ${guest.cupos === 1 ? "cupo" : "cupos"}. Puedes actualizar tu respuesta.` : "Ya nos avisaste que no podrás venir. Puedes cambiar tu respuesta.")
-               : (guest.cupos === 1 ? "Tu invitación es personal (1 cupo)." : `Tu invitación es para ${guest.cupos} personas.`))
+      ? (guest.r ? (guest.r.asiste ? (n === 1 ? "Ya confirmaste tu pase. Puedes actualizar tu respuesta." : `Ya confirmaste ${guest.r.personas} de tus ${n} pases. Puedes actualizar tu respuesta.`) : "Ya nos avisaste que no podrás venir. Puedes cambiar tu respuesta.")
+                 : (n === 1 ? "Tu invitación incluye 1 pase." : `Tu invitación incluye ${n} pases.`))
       : "Nos alegra mucho que estés aquí ✨";
     $("#welcome").hidden = false;
   }
@@ -1528,7 +1549,7 @@ const RSVP = (function(){
     input.value = g.nombre;
     if (!firstTouched){ const f = $("#names input"); if (f) f.value = g.nombre; }
     if (g.r){ (g.r.asiste ? $("#si") : $("#no")).checked = true; personas = g.r.asiste ? g.r.personas : 1; } else { $("#si").checked = true; personas = 1; }
-    renderPeople(); toggleGoing(); welcome();
+    renderPeople(); toggleGoing(); welcome(); gate();
     store.set("olivia-guest", g.id);
     BOOK.setDedication(firstName(g.nombre));
     $("#heroKicker").textContent = `${firstName(g.nombre)}, te damos la bienvenida al reino de`;
@@ -1539,17 +1560,17 @@ const RSVP = (function(){
     const q = norm(input.value);
     if (!firstTouched){ const f = $("#names input"); if (f) f.value = input.value; }
     if (guest && norm(guest.nombre) !== q){ guest = null; renderPeople(); $("#welcome").hidden = true; }
-    $("#findHint").hidden = true;
+    gate();
     if (!state.guests.length || q.length < 2){ list.hidden = true; input.setAttribute("aria-expanded", "false"); return; }
     const toks = q.split(" ");
     matches = state.guests.filter(g => { const n = norm(g.nombre); return toks.every(t => n.includes(t)); }).slice(0, 8);
     active = matches.length ? 0 : -1;
     if (!matches.length){
       list.hidden = true; input.setAttribute("aria-expanded", "false");
-      if (q.length >= 4){ $("#findHint").textContent = `No encontramos ese nombre en la lista, pero puedes confirmar igual (hasta ${CONFIG.maxSinLista} personas).`; $("#findHint").hidden = false; }
+      if (q.length >= 3) hint("No encontramos ese nombre en la lista de invitados. Revisa cómo lo escribiste (puedes buscar solo por nombre o por apellido).");
       return;
     }
-    list.innerHTML = matches.map((g, i) => `<li role="option" id="opt${i}" data-i="${i}" aria-selected="${i === active}"><span>${esc(g.nombre)}</span><small>${g.r ? (g.r.asiste ? "✓ Confirmado" : "Respondió") : (g.cupos === 1 ? "1 cupo" : g.cupos + " cupos")}</small></li>`).join("");
+    list.innerHTML = matches.map((g, i) => `<li role="option" id="opt${i}" data-i="${i}" aria-selected="${i === active}"><span>${esc(g.nombre)}</span><small>${g.r ? (g.r.asiste ? "✓ Confirmado" : "Respondió") : (g.cupos === 1 ? "1 pase" : g.cupos + " pases")}</small></li>`).join("");
     list.hidden = false; input.setAttribute("aria-expanded", "true"); input.setAttribute("aria-activedescendant", "opt0");
   }
   function toggleGoing(){ $("#goingBox").hidden = !going(); $("#errForm").hidden = true; }
@@ -1587,10 +1608,12 @@ const RSVP = (function(){
   form.addEventListener("submit", async e => {
     e.preventDefault();
     if (isClosed()){ deadline(); return; }
+    if (strict() && !guest){ err("Busca tu nombre en la lista de invitados y elígelo para confirmar."); input.focus(); return; }
     const nombre = (guest ? guest.nombre : input.value).trim();
     if (nombre.length < 3){ err("Escribe tu nombre y apellido."); input.focus(); return; }
     const asiste = going();
-    const nombres = asiste ? [...$("#names").querySelectorAll("input")].map(x => x.value.replace(/\s+/g, " ").trim()) : [];
+    const single = !!guest && maxFor() === 1;   // 1 solo pase: no se piden nombres extra
+    const nombres = asiste ? (single ? [guest.nombre] : [...$("#names").querySelectorAll("input")].map(x => x.value.replace(/\s+/g, " ").trim())) : [];
     if (asiste){
       const falta = nombres.findIndex(n => n.length < 3);
       if (falta >= 0){ err(`Falta el nombre y apellido de la persona ${falta + 1}.`); $("#names").querySelectorAll("input")[falta].focus(); return; }
@@ -1616,6 +1639,7 @@ const RSVP = (function(){
         showSent(resp, r.actualizado ? "Actualizamos tu confirmación. Este es tu pase real:" : "", "ok"); if (asiste) confetti();
       } else if (r && r.error === "lleno"){ applyState(r); err(r.remaining > 0 ? `Solo quedan ${r.remaining} lugares disponibles.` : "Ya no quedan lugares disponibles en el reino."); }
       else if (r && r.error === "cupos"){ err(`Tu invitación permite hasta ${r.cupos} personas.`); }
+      else if (r && r.error === "no_lista"){ err("No encontramos tu nombre en la lista de invitados."); }
       else if (r && r.error === "cerrado"){ if (r.closeAt) state.closeAt = r.closeAt; deadline(); }
       else err("No pudimos guardar tu confirmación. Inténtalo de nuevo, por favor.");
     } catch(_){ err("No pudimos conectarnos. Revisa tu internet e inténtalo de nuevo."); }
@@ -1636,13 +1660,14 @@ const RSVP = (function(){
   });
   $("#savePass").addEventListener("click", () => savePass(lastResponse ? lastResponse.nombres : []));
 
-  renderPeople(); toggleGoing(); deadline();
+  renderPeople(); toggleGoing(); deadline(); gate();
   if (lastResponse && !isClosed()) showSent(lastResponse, lastResponse.asiste ? "Ya confirmaste. Aquí tienes tu pase real:" : "");
   setInterval(deadline, 60000);
 
   return {
     sync(){
       if (guest){ const g = state.guests.find(x => x.id === guest.id); if (g) guest = g; }
+      gate();
       if (!state.loaded) return;
       deadline();
       if (!guest){
@@ -1701,41 +1726,6 @@ async function savePass(nombres){
   toast("Tu pase se descargó 👑");
 }
 
-/* ===================== libro de mensajes ===================== */
-const GB = (function(){
-  let showAll = false;
-  const local = () => store.get("olivia-msgs-local", []);
-  const fmt = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("es-PE", { day: "numeric", month: "short" }); };
-  function all(){ return CONFIG.api ? state.messages : local().concat(state.messages); }
-  function render(){
-    const msgs = all(), shown = showAll ? msgs : msgs.slice(0, 4);
-    $("#gbList").innerHTML = shown.map(m => `<article class="gb"><div class="h"><b>${esc(m.nombre)}</b><time>${fmt(m.fecha)}</time></div><p>${esc(m.mensaje)}</p></article>`).join("");
-    $("#gbMore").hidden = showAll || msgs.length <= 4;
-  }
-  $("#gbMore").addEventListener("click", () => { showAll = true; render(); });
-  $("#gbName").value = store.get("olivia-nombre", "");
-  $("#gbForm").addEventListener("submit", async e => {
-    e.preventDefault();
-    const nombre = $("#gbName").value.trim(), mensaje = $("#gbMsg").value.trim(), er = $("#gbErr");
-    if (nombre.length < 2){ er.textContent = "Escribe tu nombre."; er.hidden = false; return; }
-    if (mensaje.length < 3){ er.textContent = "Escribe tu mensaje para Olivia."; er.hidden = false; return; }
-    er.hidden = true; store.set("olivia-nombre", nombre);
-    if (!CONFIG.api){
-      const l = local(); l.unshift({ id: "l" + Date.now(), nombre, mensaje, fecha: new Date().toISOString() }); store.set("olivia-msgs-local", l);
-      $("#gbMsg").value = ""; render(); toast("Vista previa: tu mensaje se ve aquí, pero no se guardó."); return;
-    }
-    const b = $("#gbBtn"); b.disabled = true; b.textContent = "Guardando…";
-    try {
-      const r = await api({ action: "mensaje", nombre, mensaje });
-      if (r && r.ok){ applyState(r); $("#gbMsg").value = ""; toast("Gracias, tu mensaje ya está en el libro 💗"); }
-      else { er.textContent = "No pudimos guardar tu mensaje. Inténtalo de nuevo."; er.hidden = false; }
-    } catch(_){ er.textContent = "No pudimos conectarnos. Inténtalo de nuevo."; er.hidden = false; }
-    finally { b.disabled = false; b.textContent = "✍️ Escribir en el libro"; }
-  });
-  render();
-  return { render };
-})();
-
 /* ===================== compartir ===================== */
 $("#shareBtn").addEventListener("click", async () => {
   const url = location.href.split("#")[0].replace(/[?&]i=[^&]*/, "").replace(/\?$/, "");
@@ -1764,7 +1754,7 @@ function renderGifts(){
       else if (g.qty === 1) prog = `<small>Disponible</small>`;
       else prog = `<small>Faltan ${left} de ${g.qty}</small><div class="bar"><i style="width:${Math.min(100, g.taken / g.qty * 100)}%"></i></div>`;
       const btn = g.qty === 0 || (state.online && left <= 0) || isMine ? "" : `<button type="button" class="btn solid pick" data-id="${esc(g.id)}">Lo regalo yo</button>`;
-      return `<article class="gift ${isMine ? "mine" : ""}"><div class="gi">${iconHTML(g.icon)}</div>
+      return `<article class="gift ${isMine ? "mine" : ""}"><div class="gi">${iconHTML(g.icon)}<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy"></div>
         <h3>${esc(g.name)}${k === "panales" ? '<span class="prio">Prioridad</span>' : ""}</h3>
         <div class="d">${esc(g.detail)}${link ? `<br><a class="plink" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver producto ↗</a>` : ""}${isMine ? '<br><span class="badge">✓ Tú elegiste este regalo</span>' : ""}</div>
         <div class="foot"><div class="prog">${prog}</div>${btn}</div></article>`;
@@ -1772,33 +1762,29 @@ function renderGifts(){
     return `<section class="group"><h2>${esc(t)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}<div class="gift-list">${cards || `<p class="empty">¡Todos los regalos de esta sección ya fueron elegidos! Gracias 💗</p>`}</div></section>`;
   }).join("");
 }
+$("#giftGroups").addEventListener("error", e => { if (e.target && e.target.tagName === "IMG") e.target.remove(); }, true);   // sin foto: queda el icono
 $("#chips").addEventListener("click", e => { const c = e.target.closest(".chip"); if (!c) return; filtro = c.dataset.c; renderGifts(); });
 $("#giftGroups").addEventListener("click", e => {
   const b = e.target.closest(".pick"); if (!b) return;
   giftSel = state.gifts.find(g => g.id === b.dataset.id); if (!giftSel) return;
   $("#dlgWhat").textContent = giftSel.name;
-  $("#dlgName").value = store.get("olivia-nombre", "") || (store.get("olivia-rsvp", null) || {}).nombre || $("#dlgName").value;
-  $("#dlgErr").hidden = true;
   const dlg = $("#giftDialog"); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
-  setTimeout(() => $("#dlgName").focus(), 50);
+  setTimeout(() => $("#dlgOk").focus(), 50);
 });
 $("#dlgCancel").addEventListener("click", () => $("#giftDialog").close());
 $("#dlgForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const name = $("#dlgName").value.trim();
-  if (name.length < 2){ $("#dlgErr").hidden = false; $("#dlgName").focus(); return; }
   const g = giftSel; if (!g) return;
-  store.set("olivia-nombre", name);
   const markMine = () => { const m = mine(); if (!m.includes(g.id)){ m.push(g.id); store.set("olivia-regalos", m); } };
-  if (!CONFIG.api){ markMine(); $("#giftDialog").close(); renderGifts(); toast(`Vista previa: "${g.name}" quedaría reservado a tu nombre.`); return; }
-  const ok = $("#dlgOk"); ok.disabled = true; ok.textContent = "Reservando…";
+  if (!CONFIG.api){ markMine(); $("#giftDialog").close(); renderGifts(); toast(`Vista previa: "${g.name}" quedaría reservado.`); return; }
+  const ok = $("#dlgOk"); ok.disabled = true; ok.textContent = "Guardando…";
   try {
-    const r = await api({ action: "gift", giftId: g.id, invitado: name });
+    const r = await api({ action: "gift", giftId: g.id });
     if (r && r.ok){ markMine(); state.online = true; applyState(r); $("#giftDialog").close(); toast(`¡Gracias! Reservaste: ${g.name}`); confetti(); }
     else if (r && r.error === "agotado"){ applyState(r); $("#giftDialog").close(); toast("Justo lo eligió otra persona. Elige otro, por favor."); }
     else toast("No pudimos reservarlo. Inténtalo de nuevo.");
   } catch(_){ toast("Sin conexión. Inténtalo de nuevo en un momento."); }
-  finally { ok.disabled = false; ok.textContent = "Reservar regalo"; }
+  finally { ok.disabled = false; ok.textContent = "Sí, lo regalo"; }
 });
 
 /* ===================== navegación ===================== */

@@ -63,7 +63,7 @@ input[type=number]{width:96px}
 .btn.sm{padding:6px 13px;font-size:.88rem}
 .btn:disabled{opacity:.5}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
 .tab{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 4px;border-radius:14px;cursor:pointer;min-width:0}
 .tab[aria-selected="true"]{background:var(--rose);border-color:var(--rose);color:#fff}
 .tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
@@ -148,7 +148,7 @@ input[type=number]{width:96px}
           <div class="stat"><b id="sConf">–</b><span>Invitaciones confirmadas</span></div>
           <div class="stat"><b id="sPend">–</b><span>Pendientes</span></div>
           <div class="stat"><b id="sNo">–</b><span>No asistirán</span></div>
-          <div class="stat"><b id="sMsg">–</b><span>Mensajes</span></div>
+          <div class="stat"><b id="sPases">–</b><span>Pases asignados</span></div>
           <div class="stat"><b id="sRegalos">–</b><span>Regalos elegidos</span></div>
         </div>
       </div>
@@ -169,7 +169,6 @@ input[type=number]{width:96px}
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-p="paneI" aria-selected="true">Invitados</button>
         <button class="tab" role="tab" data-p="paneA" aria-selected="false">Asistentes</button>
-        <button class="tab" role="tab" data-p="paneM" aria-selected="false">Mensajes</button>
         <button class="tab" role="tab" data-p="paneG" aria-selected="false">Regalos</button>
       </div>
 
@@ -195,8 +194,6 @@ input[type=number]{width:96px}
         <div class="tools"><input type="search" id="qa" placeholder="Buscar asistente" aria-label="Buscar asistente"><button class="btn ghost sm" id="csvBtn" type="button">Descargar Excel (CSV)</button></div>
         <div class="list" id="aList"></div>
       </div>
-
-      <div id="paneM" role="tabpanel" hidden><div class="list" id="mList"></div></div>
 
       <div id="paneG" role="tabpanel" hidden>
         <div class="list" id="gList"></div>
@@ -248,13 +245,13 @@ function render(){
   $("#ringNum").textContent = s.personas; $("#ringCap").textContent = `de ${s.capacidad}`;
   $("#ringArc").style.strokeDashoffset = 314.16 * (1 - Math.min(1, s.personas / (s.capacidad || 1)));
   $("#sLibres").textContent = s.libres; $("#sConf").textContent = `${s.confirmadas} de ${s.invitaciones}`;
-  $("#sPend").textContent = s.pendientes; $("#sNo").textContent = s.noAsisten; $("#sMsg").textContent = s.mensajes;
+  $("#sPend").textContent = s.pendientes; $("#sNo").textContent = s.noAsisten; $("#sPases").textContent = DATA.invitados.reduce((n, r) => n + (r.cupos || 0), 0);
   $("#sRegalos").textContent = DATA.gifts.reduce((a, g) => a + g.elegidos, 0);
   $("#showCupos").checked = !!c.mostrarCupos;
   if (document.activeElement !== $("#capIn")) $("#capIn").value = c.capacidad;
   if (document.activeElement !== $("#cierreIn")) $("#cierreIn").value = c.cierre || "";
   if (document.activeElement !== $("#albumIn")) $("#albumIn").value = c.albumUrl || "";
-  renderI(); renderA(); renderM(); renderG();
+  renderI(); renderA(); renderG();
 }
 function renderI(){
   const q = $("#q").value.trim().toLowerCase();
@@ -285,14 +282,6 @@ function renderA(){
   $("#aCount").textContent = `${all.length} ${all.length === 1 ? "persona confirmada" : "personas confirmadas"}`;
   $("#aList").innerHTML = rows.length ? rows.map(a => `<div class="item"><div class="r1"><span class="name">${esc(a.nombre)}</span></div><div class="meta"><span>Invitación de ${esc(a.inv)}</span></div></div>`).join("") : `<p class="empty">Aún no hay asistentes confirmados.</p>`;
 }
-function renderM(){
-  $("#mList").innerHTML = DATA.mensajes.length ? DATA.mensajes.map(m => `
-    <div class="item ${m.visible ? "" : "hidden-msg"}">
-      <div class="r1"><span class="name">${esc(m.nombre)}</span><span style="color:var(--soft);font-size:.88rem">${when(m.fecha)}</span></div>
-      <div class="msg">“${esc(m.mensaje)}”</div>
-      <div class="acts"><button class="act" data-vis="${esc(m.id)}" data-v="${m.visible ? 0 : 1}">${m.visible ? "Ocultar" : "Mostrar"}</button><button class="del" data-delmsg="${esc(m.id)}" data-n="${esc(m.nombre)}">Borrar</button></div>
-    </div>`).join("") : `<p class="empty">Aún no hay mensajes en el libro.</p>`;
-}
 function renderG(){
   const icon = i => i === "diaper" ? "🧷" : i === "wipes" ? "🧻" : esc(i);
   $("#gList").innerHTML = DATA.gifts.map(g => {
@@ -301,7 +290,7 @@ function renderG(){
       <div style="flex:1;min-width:0"><span class="name">${esc(g.nombre)}</span>${full ? '<span class="done-tag">Elegido ✓</span>' : ""}
         <div class="meta"><span>${g.cantidad ? `${g.elegidos} de ${g.cantidad} elegidos` : `${g.elegidos} avisaron (sin límite)`}</span></div>
         ${g.cantidad ? `<div class="gbar"><i style="width:${Math.min(100, g.elegidos / g.cantidad * 100)}%"></i></div>` : ""}</div></div>
-      ${g.quienes.length ? `<ul class="who">${g.quienes.map(w => `<li><span>${esc(w.invitado)} <span style="color:var(--soft)">· ${when(w.fecha)}</span></span><button class="del" data-free="${esc(w.id)}" data-n="${esc(w.invitado)}" data-g="${esc(g.nombre)}">Liberar</button></li>`).join("")}</ul>` : ""}</div>`;
+      ${g.quienes.length ? `<ul class="who">${g.quienes.map(w => `<li><span>${esc(w.invitado || "Elegido")} <span style="color:var(--soft)">· ${when(w.fecha)}</span></span><button class="del" data-free="${esc(w.id)}" data-n="${esc(w.invitado || "un invitado")}" data-g="${esc(g.nombre)}">Liberar</button></li>`).join("")}</ul>` : ""}</div>`;
   }).join("");
 }
 
@@ -345,7 +334,7 @@ $("#albumSave").addEventListener("click", async () => {
   await act({ action: "config", albumUrl: v }, v ? "Enlace del álbum publicado en la invitación" : "Enlace del álbum quitado");
 });
 document.addEventListener("click", async e => {
-  const t = e.target.closest("[data-link],[data-cupos],[data-reset],[data-quitar],[data-free],[data-vis],[data-delmsg]"); if (!t) return;
+  const t = e.target.closest("[data-link],[data-cupos],[data-reset],[data-quitar],[data-free]"); if (!t) return;
   if (t.dataset.link){
     const url = personalLink(t.dataset.link);
     try { await navigator.clipboard.writeText(url); toast(`Enlace de ${t.dataset.n} copiado`); } catch(_){ prompt("Copia este enlace:", url); }
@@ -359,10 +348,6 @@ document.addEventListener("click", async e => {
     if (confirm(`¿Quitar a ${t.dataset.n} de la lista de invitados?`)) act({ action: "quitarInvitado", id: t.dataset.quitar }, "Invitado quitado");
   } else if (t.dataset.free){
     if (confirm(`¿Liberar "${t.dataset.g}" elegido por ${t.dataset.n}? Volverá a aparecer en la lista.`)) act({ action: "liberarRegalo", id: t.dataset.free }, "Regalo liberado");
-  } else if (t.dataset.vis){
-    act({ action: "mostrarMensaje", id: t.dataset.vis, visible: t.dataset.v === "1" }, t.dataset.v === "1" ? "Mensaje visible" : "Mensaje oculto");
-  } else if (t.dataset.delmsg){
-    if (confirm(`¿Borrar el mensaje de ${t.dataset.n}?`)) act({ action: "borrarMensaje", id: t.dataset.delmsg }, "Mensaje borrado");
   }
 });
 $("#csvBtn").addEventListener("click", () => {

@@ -1,0 +1,24 @@
+Foto de cada regalo (formato .jpg, ideal cuadrada de ~600 px y menos de 300 KB).
+Pon el archivo en esta carpeta con el nombre indicado; si falta, se muestra un icono.
+
+Pañales Babysec Súper Premium talla G        -> pan-babysec-g.jpg
+Pañales Huggies Dermacare talla G            -> pan-huggies-g.jpg
+Pañales talla XG                             -> pan-xg.jpg
+Pañitos húmedos Huggies                      -> panitos.jpg
+Mesa de actividades musical                  -> jug-mesa.jpg
+Libros de texturas                           -> jug-libros.jpg
+Tabla y cuchillito Montessori                -> jug-tabla.jpg
+Torre Montessori                             -> jug-torre.jpg
+Resbaladera de plástico                      -> jug-resbaladera.jpg
+Conjunto color rosado                        -> ropa-rosado.jpg
+Conjunto color blanco                        -> ropa-blanco.jpg
+Vestidito rosado o blanco                    -> ropa-vestido.jpg
+Mediecitas                                   -> ropa-medias.jpg
+Pijamita de algodón                          -> ropa-pijama.jpg
+Accesorios para el cabello                   -> ropa-accesorios.jpg
+Esquineros de seguridad                      -> cui-esquineros.jpg
+Cierra puertas de seguridad                  -> cui-cierrapuertas.jpg
+Vajilla de cerámica                          -> cui-vajilla.jpg
+Asiento portabebé AÚPA                       -> cui-portabebe.jpg
+
+Para usar una foto de internet, pega su enlace (https://...) en la columna 'foto' de la pestaña Regalos de tu hoja.
