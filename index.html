@@ -456,8 +456,8 @@ footer .hearts svg{width:14px;height:13px}
 .gift .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6px;transition:transform .5s}
 .gift:hover .gi img{transform:scale(1.04)}
 .gift .gi svg{width:46px;height:38px}
-.gift .tag{position:absolute;left:8px;top:8px;z-index:2;font-size:.74rem;font-weight:700;letter-spacing:.03em;color:#fff;background:#B06A7D;border-radius:999px;padding:2px 9px;box-shadow:0 4px 10px -4px rgba(90,30,50,.6)}
-.gift .tag.inf{background:linear-gradient(90deg,#C9A24E,#A9842F)}
+.gift .gtag{position:absolute;left:8px;top:8px;z-index:2;font-size:.74rem;font-weight:700;letter-spacing:.03em;color:#fff;background:#B06A7D;border-radius:999px;padding:2px 9px;box-shadow:0 4px 10px -4px rgba(90,30,50,.6)}
+.gift .gtag.inf{background:linear-gradient(90deg,#C9A24E,#A9842F)}
 .gift h3{margin:10px 4px 2px;font-size:1.04rem;line-height:1.22;text-wrap:balance}
 .gift .d{margin:0 4px;color:var(--ink-soft);font-size:.9rem;line-height:1.3;flex:1}
 .gift .foot{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:10px 4px 0}
@@ -465,8 +465,8 @@ footer .hearts svg{width:14px;height:13px}
 .gift .prog .bar{height:7px;margin:5px 0 0}
 .gift .pick{padding:8px 10px;font-size:.98rem;width:100%}
 .gift.mine{border:2px solid var(--ok)}
-.group.prio>h2::after{content:"";display:block;width:64px;height:3px;margin:6px auto 0;border-radius:3px;background:linear-gradient(90deg,#D9B35A,#A9842F)}
-.group.prio .gift{border-color:#E8C3CB}
+.group.is-prio>h2::after{content:"";display:block;width:64px;height:3px;margin:6px auto 0;border-radius:3px;background:linear-gradient(90deg,#D9B35A,#A9842F)}
+.group.is-prio .gift{border-color:#E8C3CB}
 .gift.solo{grid-column:1/-1;flex-direction:row;align-items:center;gap:12px}
 .gift.solo .gi{width:84px;flex:none}
 .gift.solo h3{margin-top:0}
@@ -1773,14 +1773,14 @@ function renderGifts(){
       else if (g.qty === 1) prog = `<small>Disponible: 1</small>`;
       else prog = `<small>Quedan ${left} de ${g.qty}</small><div class="bar"><i style="width:${Math.min(100, g.taken / g.qty * 100)}%"></i></div>`;
       const btn = (g.qty === 0 && !inf) || (state.online && left <= 0) || isMine ? "" : `<button type="button" class="btn solid pick" data-id="${esc(g.id)}">Lo regalo yo</button>`;
-      const tag = PRIORIDAD.includes(k) ? `<span class="tag">Prioridad</span>` : (inf ? `<span class="tag inf">Sin límite</span>` : "");
+      const tag = PRIORIDAD.includes(k) ? `<span class="gtag">Prioridad</span>` : (inf ? `<span class="gtag inf">Sin límite</span>` : "");
       const img = k === "otros" && !g.foto ? "" : `<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy">`;
       return `<article class="gift ${isMine ? "mine" : ""} ${k === "otros" ? "solo" : ""}">${tag}<div class="gi">${iconHTML(g.icon)}${img}</div>
         <div class="tx"><h3>${esc(g.name)}</h3>
         <p class="d">${esc(g.detail)}${link ? `<br><a class="plink" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver producto ↗</a>` : ""}${isMine ? '<br><span class="badge">✓ Tú elegiste este regalo</span>' : ""}</p></div>
         <div class="foot"><div class="prog">${prog}</div>${btn}</div></article>`;
     }).join("");
-    return `<section class="group ${PRIORIDAD.includes(k) ? "prio" : ""}"><h2>${esc(t)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}<div class="gift-list">${cards || `<p class="empty">¡Todos los regalos de esta sección ya fueron elegidos! Gracias 💗</p>`}</div></section>`;
+    return `<section class="group ${PRIORIDAD.includes(k) ? "is-prio" : ""}"><h2>${esc(t)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}<div class="gift-list">${cards || `<p class="empty">¡Todos los regalos de esta sección ya fueron elegidos! Gracias 💗</p>`}</div></section>`;
   }).join("");
 }
 $("#giftGroups").addEventListener("error", e => { if (e.target && e.target.tagName === "IMG") e.target.remove(); }, true);   // sin foto: queda el icono
