@@ -1504,7 +1504,9 @@ const BOOK = (function(){
   $("#replay").addEventListener("click", play);
 
   render(); ui();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(play); else play();
+  // el cuento empieza recién cuando el invitado toca "Abrir invitación" (si la portada de entrada está presente)
+  const autoplayBook = () => { if (!document.getElementById("gate")) play(); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(autoplayBook); else autoplayBook();
   return { setDedication(name){ $("#coverTo").textContent = name ? `Para ${name}` : "Un cuento de amor"; } };
 })();
 
@@ -2165,15 +2167,15 @@ document.querySelectorAll("svg > g.twinkle:only-child, svg > g.bob:only-child").
     if (replay){ const r = $("#replay"); if (r) r.click(); }   // el libro se abre desde la portada
   }
   if (gate){
-    if (!wanted) gate.remove();
-    else {
-      document.documentElement.classList.add("gated");
-      $("#gateBtn").addEventListener("click", () => { disarm(); start(); closeGate(true); });
-      try { audio.volume = 0; } catch(_){}
-      Promise.resolve(audio.play()).then(() => {   // algunos navegadores sí permiten el sonido automático
-        fade(VOL, 2000); ui(true); disarm(); closeGate(false);
-      }).catch(() => {});
-    }
+    // siempre se entra con un toque: así la música suena en todos los celulares y el cuento empieza desde el inicio
+    document.documentElement.classList.add("gated");
+    const abrir = () => {
+      if (gate.classList.contains("out")) return;
+      wanted = true; store.set(KEY, "si");
+      disarm(); start(); closeGate(true);
+    };
+    gate.addEventListener("click", abrir);
+    $("#gateBtn").focus({ preventScroll: true });
   }
   // al salir de la pestaña se pausa; al volver sigue sonando
   let resume = false;
