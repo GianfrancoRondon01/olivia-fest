@@ -574,6 +574,17 @@ dialog .row .btn{flex:1;padding:11px 10px}
 .twk{animation:tw 2.6s ease-in-out infinite}
 .bobk{animation:bob 5s ease-in-out infinite}
 .map.live svg.art{display:none}
+/* entrada con música */
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;text-align:center;
+  background:radial-gradient(120% 80% at 50% 30%,#FFFBF5,#FAE6E8 55%,#EFC9D1);transition:opacity .7s ease,visibility .7s}
+.gate.out{opacity:0;visibility:hidden;pointer-events:none}
+.gate-in{max-width:340px}
+.gate-cr{display:block;width:84px;height:63px;margin:0 auto;filter:drop-shadow(0 6px 10px rgba(150,110,40,.35));animation:bob 3.5s ease-in-out infinite}
+.gate-k{margin:14px 0 0;font-style:italic;font-weight:600;color:#9C7728;font-size:1.25rem;letter-spacing:.05em}
+.gate-t{margin:0 0 24px;font-family:var(--script);font-size:3.4rem;line-height:1.05;color:var(--rose-deep)}
+.gate-btn{padding:16px 30px;font-size:1.3rem;animation:pulse 2.2s ease-in-out infinite}
+.gate-m{margin:14px 0 0;color:#A85A6C;font-weight:700;font-size:1rem}
+html.gated,html.gated body{overflow:hidden}
 /* música de fondo */
 .music{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;width:52px;height:52px;padding:0;border-radius:50%;
   border:1.6px solid var(--gold-soft);background:radial-gradient(circle at 35% 30%,#fff,#FBE4E8 60%,#F1C3CD);color:#A85A6C;display:grid;place-content:center;cursor:pointer;
@@ -706,6 +717,16 @@ dialog .row .btn{flex:1;padding:11px 10px}
 </defs>
 </svg>
 
+<!-- ======= ENTRADA: un toque para abrir la invitación (los navegadores solo permiten música después de un toque) ======= -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Abrir la invitación">
+  <div class="gate-in">
+    <svg class="gate-cr" viewBox="0 0 40 30" aria-hidden="true"><use href="#crown"/></svg>
+    <p class="gate-k">Estás invitado al</p>
+    <p class="gate-t">Reino de Olivia</p>
+    <button class="btn solid gate-btn" id="gateBtn" type="button">✨ Abrir invitación</button>
+    <p class="gate-m">🎵 Con música</p>
+  </div>
+</div>
 <main id="invite">
   <!-- ======= INTRO: libro con el cuento y el álbum "Mis 12 meses" ======= -->
   <section class="intro" id="intro" aria-label="Érase una vez">
@@ -1056,7 +1077,7 @@ dialog .row .btn{flex:1;padding:11px 10px}
   <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3 9 5.2v10.3A3 3 0 1 0 11 18.3V9.6l6-1.3v5.2A3 3 0 1 0 19 16.3Z"/></svg>
   <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
 </button>
-<audio id="bgm" src="musica/abejita.m4a" preload="none" loop playsinline></audio>
+<audio id="bgm" src="musica/abejita.m4a" preload="auto" loop playsinline></audio>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
@@ -2135,6 +2156,25 @@ document.querySelectorAll("svg > g.twinkle:only-child, svg > g.bob:only-child").
   const arm = () => EVS.forEach(ev => addEventListener(ev, first, { capture: true, passive: true }));
   const disarm = () => EVS.forEach(ev => removeEventListener(ev, first, { capture: true }));
   arm();
+  // ---- al entrar: intenta sonar sola; si el navegador no lo permite, la portada de entrada pide un toque ----
+  const gate = $("#gate");
+  function closeGate(replay){
+    if (!gate || gate.classList.contains("out")) return;
+    gate.classList.add("out"); document.documentElement.classList.remove("gated");
+    setTimeout(() => gate.remove(), 800);
+    if (replay){ const r = $("#replay"); if (r) r.click(); }   // el libro se abre desde la portada
+  }
+  if (gate){
+    if (!wanted) gate.remove();
+    else {
+      document.documentElement.classList.add("gated");
+      $("#gateBtn").addEventListener("click", () => { disarm(); start(); closeGate(true); });
+      try { audio.volume = 0; } catch(_){}
+      Promise.resolve(audio.play()).then(() => {   // algunos navegadores sí permiten el sonido automático
+        fade(VOL, 2000); ui(true); disarm(); closeGate(false);
+      }).catch(() => {});
+    }
+  }
   // al salir de la pestaña se pausa; al volver sigue sonando
   let resume = false;
   document.addEventListener("visibilitychange", () => {
