@@ -11,6 +11,8 @@
 <!-- Vista previa al compartir por WhatsApp (si tu repositorio no se llama olivia-fest, cambia la dirección) -->
 <meta property="og:image" content="https://gianfrancorondon01.github.io/olivia-fest/fotos/portada.jpg">
 <meta name="theme-color" content="#F3DED8">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -192,21 +194,22 @@ a{color:var(--rose-deep)}
 
 /* carruaje real */
 .carriage-band{position:relative;text-align:center;padding:4px 0 0;background:radial-gradient(60% 55% at 50% 58%,rgba(255,244,214,.9),transparent 72%)}
-.carriage{max-width:380px;margin:0 auto}
+.carriage{position:relative;max-width:380px;margin:0 auto}
 .carriage.small{max-width:230px}
-.carriage svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 10px 10px rgba(120,60,70,.18))}
+/* cada pieza se anima por separado (cuerpo, ruedas, estrellas): así el navegador no redibuja todo el dibujo en cada cuadro */
+.car-roll{position:relative;width:100%;aspect-ratio:360/312}
+.car-roll>svg{position:absolute;display:block;overflow:visible}
+.car-body{inset:0;width:100%;height:100%;transform-origin:50% 92%;animation:rock 3.2s ease-in-out infinite}
+.car-w{top:58.33%;width:31.11%;height:auto;aspect-ratio:1;animation:spin 9s linear infinite}
+.car-w1{left:6.11%}
+.car-w2{left:62.78%}
+.car-shadow{position:absolute;left:8%;right:8%;bottom:0;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(140,70,85,.22),transparent)}
+.car-star{position:absolute;translate:-50% -50%;color:#E6C477;overflow:visible}
 .wheel{transform-box:fill-box;transform-origin:50% 50%;animation:spin 9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.car-rock{transform-box:fill-box;transform-origin:50% 100%;animation:rock 3.2s ease-in-out infinite}
 @keyframes rock{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(-.8deg)}75%{transform:translateY(-2px) rotate(.8deg)}}
-.car-crown{transform-box:fill-box;transform-origin:50% 100%;animation:crownGlow 2.6s ease-in-out infinite}
-@keyframes crownGlow{50%{filter:drop-shadow(0 0 6px rgba(255,230,160,.95));transform:translateY(-2px)}}
-.curtain{transform-box:fill-box;transform-origin:50% 0;animation:sway2 4s ease-in-out infinite}
-.curtain.r{animation-delay:-2s}
-@keyframes sway2{50%{transform:skewX(2.5deg)}}
-.car-roll{transform-box:fill-box}
 .carriage-band.go .car-roll{animation:rollIn 2.6s cubic-bezier(.16,.84,.3,1) both}
-.carriage-band.go .wheel{animation:spinFast 2.6s cubic-bezier(.16,.84,.3,1) both,spin 9s linear 2.6s infinite}
+.carriage-band.go .car-w{animation:spinFast 2.6s cubic-bezier(.16,.84,.3,1) both,spin 9s linear 2.6s infinite}
 @keyframes rollIn{from{transform:translateX(-130%)}}
 @keyframes spinFast{from{transform:rotate(-900deg)}}
 .car-cap{font-family:var(--script);font-size:1.9rem;line-height:1.1;color:var(--rose-deep);margin:0;text-shadow:0 1px 0 rgba(255,255,255,.9)}
@@ -222,7 +225,7 @@ a{color:var(--rose-deep)}
 @keyframes dotJump{0%,60%,100%{transform:none}30%{transform:translateY(-6px)}}
 
 /* ================= MARIPOSAS REALISTAS ================= */
-.bf{overflow:visible;filter:drop-shadow(0 5px 4px rgba(90,50,40,.25))}
+.bf{overflow:visible}
 .wl{transform-box:fill-box;transform-origin:0 50%;animation:flap .3s ease-in-out infinite alternate}
 @keyframes flap{to{transform:scaleX(.26) skewY(4deg)}}
 .fly1{animation:fly1 10s ease-in-out infinite}
@@ -264,7 +267,7 @@ p{margin:0 0 1em}
 .fg{position:relative;margin:6px -16px 0}
 .fg-stage{position:relative;height:86cqw;perspective:1100px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .fg-slide{position:absolute;left:50%;top:50%;width:56cqw;aspect-ratio:3/4;margin:0;
-  transition:transform .6s cubic-bezier(.22,.8,.24,1),opacity .5s,filter .5s;cursor:pointer}
+  transition:transform .6s cubic-bezier(.22,.8,.24,1),opacity .5s;cursor:pointer}
 .fg-card{position:absolute;inset:0;border-radius:22px;padding:6px;background:linear-gradient(145deg,#FFFDF8,#F6ECDD);
   box-shadow:0 0 0 1px rgba(205,170,92,.85),0 24px 34px -16px rgba(110,60,70,.55)}
 .fg-card .in{position:relative;width:100%;height:100%;border-radius:17px;overflow:hidden;background:#F5D9DD}
@@ -565,6 +568,27 @@ dialog .row .btn{flex:1;padding:11px 10px}
 .confetti i{position:absolute;top:-14px;width:9px;height:13px;border-radius:2px;animation:conf linear forwards}
 @keyframes conf{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
 
+/* rendimiento: lo que no está en pantalla queda en pausa */
+.zz-off,.zz-off *,.zz-off *::before,.zz-off *::after{animation-play-state:paused!important}
+/* estrellitas y coronas animadas como capa propia (no se redibujan en cada cuadro) */
+.twk{animation:tw 2.6s ease-in-out infinite}
+.bobk{animation:bob 5s ease-in-out infinite}
+.map.live svg.art{display:none}
+/* música de fondo */
+.music{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;width:52px;height:52px;padding:0;border-radius:50%;
+  border:1.6px solid var(--gold-soft);background:radial-gradient(circle at 35% 30%,#fff,#FBE4E8 60%,#F1C3CD);color:#A85A6C;display:grid;place-content:center;cursor:pointer;
+  box-shadow:0 10px 22px -10px rgba(120,50,70,.75);-webkit-tap-highlight-color:transparent}
+.music svg{width:22px;height:22px;display:block}
+.music .eq{display:none;align-items:flex-end;gap:3px;height:20px}
+.music .eq i{display:block;width:4px;height:100%;border-radius:2px;background:linear-gradient(#E6C477,#C27D8D);transform-origin:50% 100%;animation:eq 1s ease-in-out infinite}
+.music .eq i:nth-child(2){animation-delay:-.35s}
+.music .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.music.on .eq{display:flex}
+.music.on .note{display:none}
+.music:not(.on)::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(201,130,143,.45);animation:ring2 2.4s ease-out infinite;pointer-events:none}
+@keyframes ring2{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+.music:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .petals,.dust{display:none}
@@ -1028,6 +1052,11 @@ dialog .row .btn{flex:1;padding:11px 10px}
   </form>
 </dialog>
 
+<button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Activar la música">
+  <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3 9 5.2v10.3A3 3 0 1 0 11 18.3V9.6l6-1.3v5.2A3 3 0 1 0 19 16.3Z"/></svg>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<audio id="bgm" src="musica/abejita.m4a" preload="none" loop playsinline></audio>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
@@ -1070,6 +1099,12 @@ const REGALOS = [
   {id:"cui-enchufes",cat:"cuidado",name:"Protectores de enchufe",detail:"Tapitas para que no meta los deditos en los enchufes",qty:3,icon:"🔌",foto:PV+"218457-600-600/20136782.jpg"},
   {id:"cui-cajones",cat:"cuidado",name:"Seguros para cajones y muebles",detail:"Para que no abra cajones ni gabinetes",qty:3,icon:"🔒",foto:PV+"31599991-600-600/imageUrl_1.jpg"},
   {id:"cui-cierrapuertas",cat:"cuidado",name:"Tope de puerta antipellizcos",detail:"Para que no se pille los deditos con la puerta",qty:2,icon:"🚪",foto:PV+"30965619-600-600/2416181.jpg"},
+  {id:"cui-bloqueador",cat:"cuidado",name:"Bloqueador solar para bebé",detail:"FPS 50+ para sus paseos bajo el sol de Arequipa",qty:3,icon:"☀️",foto:PV+"27424318-600-600/image-0.jpg"},
+  {id:"cui-sombrero",cat:"cuidado",name:"Sombrero de ala ancha",detail:"Para cuidar su carita del sol",qty:2,icon:"👒",foto:PV+"33474062-600-600/image-fbfffabe84d54924937a414b36c15b63.jpg"},
+  {id:"cui-bano",cat:"cuidado",name:"Shampoo y baño líquido para bebé",detail:"Johnson's Baby u otra marca suave, de la cabeza a los pies",qty:0,icon:"🧴",foto:PV+"34341512-600-600/20172895.jpg"},
+  {id:"cui-crema",cat:"cuidado",name:"Crema para la dermatitis del pañal",detail:"Hipoglós, Desitin o similar",qty:0,icon:"🩹",foto:PV+"29037117-600-600/image-d416fc1ae2294fa1b3767b6274a87923.jpg"},
+  {id:"cui-dientes",cat:"cuidado",name:"Cepillos de dientes para bebé",detail:"Para cuidar sus primeros dientitos",qty:2,icon:"🪥",foto:PV+"30965433-600-600/2416113.jpg"},
+  {id:"cui-kit",cat:"cuidado",name:"Set de cuidado diario",detail:"Cortaúñas, peine, cepillo y más para su aseo",qty:1,icon:"✂️",foto:PV+"36190988-600-600/20138713.jpg"},
   {id:"cui-vajilla",cat:"cuidado",name:"Vajilla de cerámica",detail:"Platito y tacita para sus primeras comidas",qty:2,icon:"🥣",foto:PV+"32273144-600-600/imageUrl_1.jpg"},
   {id:"cui-portabebe",cat:"cuidado",name:"Asiento portabebé AÚPA",detail:"Soporte de cadera para cargarla como en brazos",qty:1,icon:"👶",url:"https://aupa.pe/products/asiento-portabebe",foto:"https://aupa.pe/cdn/shop/files/5.auparosa.jpg?width=600"},
   {id:"ropa-rosado",cat:"ropa",name:"Conjunto color rosado",detail:"Talla 12 a 18 meses",qty:0,icon:"👚",foto:PV+"30443945-600-600/image-bead5709edb44d3a85d70583ae3a5da2.jpg"},
@@ -1078,8 +1113,13 @@ const REGALOS = [
   {id:"ropa-medias",cat:"ropa",name:"Mediecitas",detail:"Pack de varios pares",qty:0,icon:"🧦",foto:PV+"31076976-600-600/20438980.jpg"},
   {id:"ropa-pijama",cat:"ropa",name:"Pijamita de algodón",detail:"Talla 12 a 18 meses",qty:0,icon:"🌙",foto:PV+"36004933-600-600/2808757.jpg"},
   {id:"ropa-accesorios",cat:"ropa",name:"Accesorios para el cabello",detail:"Vinchas, lazos y ganchitos",qty:0,icon:"🎀",foto:PV+"36273275-600-600/image-7b9759b3aff549ba91cc69865ec04dbe.jpg"},
+  {id:"ropa-zapatitos",cat:"ropa",name:"Zapatitos de primeros pasos",detail:"Talla 20 a 22, suela flexible",qty:2,icon:"👟",foto:PV+"34216886-600-600/20539821.jpg"},
   {id:"jug-mesa",cat:"juguetes",name:"Mesa de actividades musical",detail:"Luces, sonidos y botones",qty:1,icon:"🎹",foto:PV+"36081432-600-600/imageUrl_1.jpg"},
+  {id:"jug-bloques",cat:"juguetes",name:"Bloques grandes Mega Bloks",detail:"Para armar, encajar y desarmar mil veces",qty:1,icon:"🧱",foto:PV+"30970948-600-600/2420338.jpg"},
+  {id:"jug-tablero",cat:"juguetes",name:"Tablero de actividades Montessori",detail:"Cierres, broches y llavecitas para sus manitos",qty:1,icon:"🧩",foto:PV+"33931208-600-600/TABLERO-SENSORIAL-MONTESSORI.jpg"},
+  {id:"jug-triciclo",cat:"juguetes",name:"Triciclo con barra para empujar",detail:"Crece con ella: primero la paseamos y luego pedalea solita",qty:1,icon:"🚲",foto:PV+"34198443-600-600/imageUrl_1.jpg"},
   {id:"jug-libros",cat:"juguetes",name:"Libros de texturas",detail:"Para tocar y explorar con las manitos",qty:2,icon:"📚",foto:PV+"35306625-600-600/imageUrl_1.jpg"},
+  {id:"jug-palabras",cat:"juguetes",name:"Libros de primeras palabras",detail:"De cartón duro, para aprender jugando",qty:2,icon:"📖",foto:PV+"27189191-600-600/20289499.jpg"},
   {id:"jug-tabla",cat:"juguetes",name:"Tabla y cuchillito Montessori",detail:"Cuchillo ondulado seguro para que Olivia nos ayude en la cocina",qty:1,icon:"🥕",foto:PV+"30607543-600-600/imageUrl_1.jpg"},
   {id:"jug-torre",cat:"juguetes",name:"Torre Montessori",detail:"Para que se pare y nos acompañe a la altura de la mesa",qty:1,icon:"🏰",foto:PV+"35634575-600-600/Image-1.jpg"},
   {id:"jug-resbaladera",cat:"juguetes",name:"Resbaladera de plástico",detail:"Con piscina o con columpio",qty:1,icon:"🎠",foto:PV+"30121575-600-600/20417721.jpg"},
@@ -1088,7 +1128,7 @@ const REGALOS = [
 const GRUPOS = [
   ["panales","Pañales y toallitas","Desde talla G · todos pueden regalarlos"],
   ["cuidado","Su cuidado y seguridad","Ahora que Olivia camina y explora toda la casa"],
-  ["ropa","Ropita","Talla 12 a 18 meses, en rosado y blanco · todos pueden regalarla"],
+  ["ropa","Ropita","Talla 12 a 18 meses, en rosado y blanco"],
   ["juguetes","Juguetes","Para jugar, aprender y moverse"],
   ["otros","Con cariño",""]
 ];
@@ -1175,15 +1215,15 @@ function carriageSVG(){
       w += `<path d="M${p((a1 + a2) / 2, ri)}L${p(a1, ro)}L${p(a2, ro)}Z" fill="${i % 2 ? "url(#cGoldS)" : "#F9DCE2"}"/>`;
     }
     const h = (x, y, s) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 9C-8 4-9-3-4-5C-1.6-6 0-4 0-2.4C0-4 1.6-6 4-5C9-3 8 4 0 9Z" fill="url(#cGem)" stroke="#fff" stroke-width=".8"/>`;
-    return `<g class="wheel"><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#cWheel)"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#cFringe)" opacity=".7"/>${w}
+    return `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#cWheel)"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#cFringe)" opacity=".7"/>${w}
       <circle cx="${cx}" cy="${cy}" r="${(r * .92).toFixed(1)}" fill="none" stroke="url(#cGold)" stroke-width="${(r * .16).toFixed(1)}"/>
       <circle cx="${cx}" cy="${cy}" r="${(r * .82).toFixed(1)}" fill="none" stroke="#FFF1C9" stroke-width="1.2" opacity=".8"/>
       <circle cx="${cx}" cy="${cy}" r="${(r * .27).toFixed(1)}" fill="url(#cGold)" stroke="#A9842F" stroke-width="1"/>
       ${h(cx, cy - r * .05, r * .016)}</g>`;
   };
-  const star = (x, y, k, d) => `<g transform="translate(${x} ${y}) scale(${k})" style="color:#E6C477"><g class="twinkle" style="animation-delay:-${d}s"><use href="#star4" x="-9" y="-9" width="18" height="18"/></g></g>`;
+  const star = (x, y, k, d) => `<svg class="car-star" style="left:${(x / 3.6).toFixed(2)}%;top:${(y / 3.12).toFixed(2)}%;width:${(k * 5).toFixed(2)}%" viewBox="-9 -9 18 18" aria-hidden="true"><g class="twinkle" style="animation-delay:-${d}s"><use href="#star4" x="-9" y="-9" width="18" height="18"/></g></svg>`;
   const heart = (x, y, s) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 9C-8 4-9-3-4-5C-1.6-6 0-4 0-2.4C0-4 1.6-6 4-5C9-3 8 4 0 9Z" fill="url(#cGem)" stroke="#fff" stroke-width=".8"/>`;
-  return `<svg viewBox="0 0 360 312" role="img" aria-label="Carruaje de princesa rosado con dorado, como la piñata de la fiesta">
+  return `<div class="car-roll"><i class="car-shadow"></i><svg class="car-body" viewBox="0 0 360 312" role="img" aria-label="Carruaje de princesa rosado con dorado, como la piñata de la fiesta">
     <defs>
       <linearGradient id="cGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3A6"/><stop offset=".45" stop-color="#D9B35A"/><stop offset="1" stop-color="#A9842F"/></linearGradient>
       <linearGradient id="cGoldS" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DA94"/><stop offset="1" stop-color="#C39A43"/></linearGradient>
@@ -1196,8 +1236,6 @@ function carriageSVG(){
       <clipPath id="cBodyClip"><ellipse cx="180" cy="152" rx="122" ry="104"/></clipPath>
       <clipPath id="cDoorClip"><path d="M138 160V112a42 46 0 0 1 84 0V160Z"/></clipPath>
     </defs>
-    <ellipse class="car-shadow" cx="180" cy="300" rx="150" ry="9" fill="rgba(140,70,85,.18)"/>
-    <g class="car-roll"><g class="car-rock">
       <ellipse cx="180" cy="152" rx="122" ry="104" fill="url(#cBody)"/>
       <g clip-path="url(#cBodyClip)"><rect x="50" y="40" width="260" height="230" fill="url(#cFringe)"/>
         <path d="M120 52C96 110 96 196 122 252M240 52C264 110 264 196 238 252" stroke="#C97C90" stroke-opacity=".18" stroke-width="3" fill="none"/></g>
@@ -1230,10 +1268,10 @@ function carriageSVG(){
         ${heart(180, 32, 1.35)}
         <circle cx="160" cy="40" r="2.6" fill="#F6C3CE"/><circle cx="200" cy="40" r="2.6" fill="#F6C3CE"/>
       </g>
-    </g>
-    ${wheel(78, 238, 56)}${wheel(282, 238, 56)}</g>
-    ${star(30, 60, 1.2, 0)}${star(330, 50, 1, 1)}${star(16, 170, .8, 1.6)}${star(344, 160, 1.1, .6)}${star(250, 20, .8, 2)}${star(108, 22, .7, 1.2)}
-  </svg>`;
+    </svg>
+    <svg class="car-w car-w1" viewBox="0 0 112 112" aria-hidden="true">${wheel(56, 56, 56)}</svg>
+    <svg class="car-w car-w2" viewBox="0 0 112 112" aria-hidden="true">${wheel(56, 56, 56)}</svg></div>
+    ${star(30, 60, 1.2, 0)}${star(330, 50, 1, 1)}${star(16, 170, .8, 1.6)}${star(344, 160, 1.1, .6)}${star(250, 20, .8, 2)}${star(108, 22, .7, 1.2)}`;
 }
 document.querySelectorAll(".carriage").forEach(el => { el.innerHTML = carriageSVG(); });
 (function(){
@@ -1300,7 +1338,7 @@ const BOOK = (function(){
   const rots = [-1.8, 1.4, -1, 1.8, -1.4, 1];
   const capTxt = p => p.mes ? { t: `Mes ${p.mes}`, s: p.mes === 11 ? "¡Casi mi primer añito!" : "" } : { t: p.t, s: p.s };
   const alt = (p, j) => p.mes ? `Olivia a los ${p.mes} ${p.mes === 1 ? "mes" : "meses"}${p.fotos.length > 1 ? ` (foto ${j + 1})` : ""}` : `${p.t} (foto ${j + 1})`;
-  const imgTag = (p, f, j) => `<img data-src="${A}${f}.jpg" alt="${esc(alt(p, j))}">`;
+  const imgTag = (p, f, j) => `<img decoding="async" data-src="${A}${f}.jpg" alt="${esc(alt(p, j))}">`;
   // "Mes" en letra cursiva y el número en letra clásica, para que se lea completo
   const titleHTML = p => p.mes ? `Mes <span class="num">${p.mes}</span>` : esc(p.t);
   const page = (p, k) => {
@@ -1514,7 +1552,7 @@ function FairyGallery(root){
     const st = z ? ` style="--z:${z};--fo:${fx} ${fy}"` : "";
     return `<figure class="fg-slide" data-i="${i}"><div class="fg-card"><div class="in${fit ? " fit" : ""}">
       <div class="ph" style="background:radial-gradient(circle at 50% 30%,${tints[i % 3]})"><svg viewBox="0 0 40 30"><use href="#crown"/></svg>${esc(label)}</div>
-      ${fit ? `<img class="bg" data-src="fotos/${prefix}${i + 1}.jpg" alt="">` : ""}<img class="main" data-src="fotos/${prefix}${i + 1}.jpg" alt="${esc(label)} ${i + 1}"${st}></div></div></figure>`;
+      ${fit ? `<img class="bg" decoding="async" data-src="fotos/${prefix}${i + 1}.jpg" alt="">` : ""}<img class="main" decoding="async" data-src="fotos/${prefix}${i + 1}.jpg" alt="${esc(label)} ${i + 1}"${st}></div></div></figure>`;
   }).join("");
   const slides = [...stage.children];
   let cur = 0, visible = false, pauseUntil = 0, lastFx = "";
@@ -1537,7 +1575,6 @@ function FairyGallery(root){
       else if (a === 1){ tf = `translateX(${sg * 58}%) rotateY(${-sg * 26}deg) scale(.82)`; op = .8; z = 4; }
       else { tf = `translateX(${sg * 96}%) rotateY(${-sg * 36}deg) scale(.66)`; op = 0; z = 2; }
       s.style.transform = `translate(-50%,-50%) ${tf}`; s.style.opacity = op; s.style.zIndex = z;
-      s.style.filter = a ? "saturate(.85) brightness(.97)" : "none";
       s.setAttribute("aria-hidden", a ? "true" : "false");
     });
     nEl.textContent = `${cur + 1} / ${n}`; line.style.width = `${(cur + 1) / n * 100}%`;
@@ -1634,10 +1671,20 @@ renderCalendar();
   <g transform="translate(366 290)" opacity=".75"><circle r="14" fill="#fff" stroke="#DCC28B"/><path d="M0-10 4 0 0 10-4 0Z" fill="#C98291"/><text y="-17" text-anchor="middle" font-size="10" font-weight="700" fill="#9C7728">N</text></g>`;
   $("#mapArt").innerHTML = s;
   if (CONFIG.mapaReal){
-    const f = document.createElement("iframe");
-    f.title = "Mapa de Los Laureles, Cerro Colorado"; f.loading = "lazy"; f.referrerPolicy = "no-referrer-when-downgrade";
-    f.src = "https://maps.google.com/maps?q=-16.3788072,-71.5575817(Los%20Laureles)&z=16&hl=es&output=embed";
-    $("#map").insertBefore(f, $("#mapOpen"));
+    // el mapa real se carga cuando el invitado se acerca a esta sección: la página abre más rápido
+    const mapEl = $("#map");
+    const put = () => {
+      if (mapEl.querySelector("iframe")) return;
+      const f = document.createElement("iframe");
+      f.title = "Mapa de Los Laureles, Cerro Colorado"; f.loading = "lazy"; f.referrerPolicy = "no-referrer-when-downgrade";
+      f.addEventListener("load", () => mapEl.classList.add("live"), { once: true });
+      f.src = "https://www.google.com/maps?q=-16.3788072,-71.5575817(Los%20Laureles)&z=16&hl=es&output=embed";
+      mapEl.insertBefore(f, $("#mapOpen"));
+    };
+    if ("IntersectionObserver" in window){
+      const io = new IntersectionObserver(es => { if (es[0].isIntersecting){ io.disconnect(); put(); } }, { rootMargin: "600px 0px" });
+      io.observe(mapEl);
+    } else put();
   }
 })();
 
@@ -1669,12 +1716,26 @@ function applyState(d){
   if ("remaining" in d) state.remaining = Number(d.remaining);
   if (d.closeAt) state.closeAt = d.closeAt;
   if ("albumUrl" in d) state.albumUrl = safeUrl(d.albumUrl);
-  renderCupos(); renderGifts(); renderAlbum(); RSVP.sync(); renderCalendar(state.closeAt);
+  const sig = JSON.stringify(state.gifts);   // la lista de regalos solo se vuelve a dibujar si cambió algo
+  if (sig !== lastGifts && !$("#giftsView").hidden){ lastGifts = sig; renderGifts(); }
+  renderCupos(); renderAlbum(); RSVP.sync(); renderCalendar(state.closeAt);
 }
-async function refresh(){
-  try { const d = await api(); if (d && d.ok){ state.online = true; applyState(d); } }
-  catch(e){ state.online = false; }
-  if (!state.loaded){ state.loaded = true; RSVP.sync(); }
+// una sola consulta a la vez; si la hoja tarda o falla (mucho tráfico), reintenta con calma
+let refreshing = null, fails = 0, lastGifts = "";
+function refresh(){
+  if (refreshing) return refreshing;
+  refreshing = (async () => {
+    try {
+      const d = await api();
+      if (!d || !d.ok) throw new Error("respuesta");
+      state.online = true; fails = 0; applyState(d);
+    } catch(e){
+      state.online = false;
+      if (CONFIG.api && ++fails <= 4) setTimeout(refresh, 4000 * fails * fails);
+    }
+    if (!state.loaded){ state.loaded = true; RSVP.sync(); }
+  })().finally(() => { refreshing = null; });
+  return refreshing;
 }
 function renderCupos(){
   const show = state.online && state.showCounter;
@@ -1964,7 +2025,7 @@ function renderGifts(){
       else prog = `<small>Quedan ${left} de ${g.qty}</small><div class="bar"><i style="width:${Math.min(100, g.taken / g.qty * 100)}%"></i></div>`;
       const btn = (g.qty === 0 && !inf) || (state.online && left <= 0) || isMine ? "" : `<button type="button" class="btn solid pick" data-id="${esc(g.id)}">Lo regalo yo</button>`;
       const tag = PRIORIDAD.includes(k) ? `<span class="gtag">Prioridad</span>` : (inf ? `<span class="gtag inf">Sin límite</span>` : "");
-      const img = k === "otros" && !g.foto ? "" : `<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy">`;
+      const img = k === "otros" && !g.foto ? "" : `<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy" decoding="async">`;
       return `<article class="gift ${isMine ? "mine" : ""} ${k === "otros" ? (g.foto ? "solo qr" : "solo") : ""}">${tag}<div class="gi">${iconHTML(g.icon)}${img}</div>
         <div class="tx"><h3>${esc(g.name)}</h3>
         <p class="d">${esc(g.detail)}${link ? `<br><a class="plink" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver producto ↗</a>` : ""}${k === "otros" && g.foto ? `<span class="zoomhint">🔍 Toca el código para verlo grande</span>` : ""}${isMine ? '<br><span class="badge">✓ Tú elegiste este regalo</span>' : ""}</p></div>
@@ -2009,10 +2070,79 @@ function route(){
 }
 addEventListener("hashchange", route);
 
-renderGifts(); renderAlbum(); RSVP.sync(); route();
+renderAlbum(); RSVP.sync(); route();   // la lista de regalos se dibuja recién cuando el invitado la abre
 refresh();
-setInterval(() => { if (state.online && document.visibilityState === "visible") refresh(); }, 30000);
+setInterval(() => { if (state.online && document.visibilityState === "visible") refresh(); }, 45000);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && CONFIG.api) refresh(); });
+
+/* ===================== fluidez: lo que no se ve queda en pausa ===================== */
+// las estrellitas y coronas sueltas se animan como capa propia: se ven igual, pero el navegador no las redibuja en cada cuadro
+document.querySelectorAll("svg > g.twinkle:only-child, svg > g.bob:only-child").forEach(g => {
+  const s = g.parentNode;
+  s.classList.add(g.classList.contains("twinkle") ? "twk" : "bobk");
+  s.style.animationDelay = g.style.animationDelay;
+  g.removeAttribute("class"); g.style.animationDelay = "";
+});
+(function(){
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("zz-off", !e.isIntersecting)), { rootMargin: "250px 0px" });
+  document.querySelectorAll("#intro, #reino, #invite > section, #invite > footer").forEach(el => io.observe(el));
+})();
+
+/* ===================== música de fondo ===================== */
+(function(){
+  const audio = $("#bgm"), btn = $("#musicBtn");
+  if (!audio || !btn) return;
+  const VOL = .32, KEY = "olivia-musica";
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let wanted = store.get(KEY, "si") !== "no";   // si el invitado la apaga, se respeta
+  let ctx = null, gain = null, fadeT = null;
+  // el volumen se controla con Web Audio (en iPhone es la única forma de bajarlo)
+  function setup(){
+    if (ctx || !AC) return;
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = "playback";
+      ctx = new AC(); gain = ctx.createGain(); gain.gain.value = 0;
+      ctx.createMediaElementSource(audio).connect(gain); gain.connect(ctx.destination);
+    } catch(_){ ctx = null; gain = null; }
+  }
+  function fade(to, ms){
+    if (gain){
+      const t = ctx.currentTime; gain.gain.cancelScheduledValues(t);
+      gain.gain.setValueAtTime(gain.gain.value, t); gain.gain.linearRampToValueAtTime(to, t + ms / 1000); return;
+    }
+    clearInterval(fadeT); const from = audio.volume, t0 = performance.now();
+    fadeT = setInterval(() => { const k = Math.min(1, (performance.now() - t0) / ms); try { audio.volume = from + (to - from) * k; } catch(_){} if (k >= 1) clearInterval(fadeT); }, 50);
+  }
+  function ui(on){ btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", String(on)); btn.setAttribute("aria-label", on ? "Pausar la música" : "Activar la música"); }
+  // se llama dentro de un toque del invitado: los navegadores solo permiten sonido así
+  function start(){
+    setup();
+    if (!gain){ try { audio.volume = 0; } catch(_){} }
+    const p = audio.play();
+    if (ctx && ctx.state !== "running") ctx.resume().catch(() => {});
+    return Promise.resolve(p).then(() => { fade(VOL, 1800); ui(true); return true; }).catch(() => { ui(false); return false; });
+  }
+  function stop(){ fade(0, 400); setTimeout(() => { if (!btn.classList.contains("on")) audio.pause(); }, 450); ui(false); }
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    wanted = !btn.classList.contains("on"); store.set(KEY, wanted ? "si" : "no");
+    if (wanted){ disarm(); start(); } else stop();
+  });
+  // arranca con el primer toque en cualquier parte de la invitación
+  const EVS = ["pointerup", "touchend", "keydown", "click"];
+  const first = e => { if (!wanted || btn.classList.contains("on") || (e.target && e.target.closest && e.target.closest("#musicBtn"))) return; start().then(ok => { if (ok) disarm(); }); };
+  const arm = () => EVS.forEach(ev => addEventListener(ev, first, { capture: true, passive: true }));
+  const disarm = () => EVS.forEach(ev => removeEventListener(ev, first, { capture: true }));
+  arm();
+  // al salir de la pestaña se pausa; al volver sigue sonando
+  let resume = false;
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden){ resume = btn.classList.contains("on"); if (resume) audio.pause(); }
+    else if (resume && wanted){ start().then(ok => { if (!ok){ ui(false); arm(); } }); }
+  });
+  ui(false);
+})();
 </script>
 </body>
 </html>
