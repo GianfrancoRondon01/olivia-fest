@@ -220,12 +220,12 @@ p{margin:0 0 1em}
 .fg{position:relative;margin:6px -16px 0}
 .fg-stage{position:relative;height:86cqw;perspective:1100px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .fg-slide{position:absolute;left:50%;top:50%;width:56cqw;aspect-ratio:3/4;margin:0;
-  transition:transform 1s cubic-bezier(.22,.8,.24,1),opacity .9s,filter .9s;cursor:pointer}
+  transition:transform .65s cubic-bezier(.22,.8,.24,1),opacity .55s,filter .55s;cursor:pointer}
 .fg-card{position:absolute;inset:0;border-radius:22px;padding:6px;background:linear-gradient(145deg,#FFFDF8,#F6ECDD);
   box-shadow:0 0 0 1px rgba(205,170,92,.85),0 24px 34px -16px rgba(110,60,70,.55)}
 .fg-card .in{position:relative;width:100%;height:100%;border-radius:17px;overflow:hidden;background:#F5D9DD}
 .fg-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.fg-card.arrive{animation:arrive 1.4s ease-out}
+.fg-card.arrive{animation:arrive .8s ease-out}
 @keyframes arrive{0%{filter:blur(12px) brightness(1.7) saturate(.6);opacity:.2;transform:scale(.94)}55%{filter:blur(2px) brightness(1.15);opacity:1}100%{filter:none;transform:none}}
 .fg-fx{position:absolute;inset:0;pointer-events:none;z-index:20;overflow:visible}
 .fg-flash{position:absolute;left:50%;top:50%;width:70cqw;height:90cqw;transform:translate(-50%,-50%);border-radius:50%;
@@ -449,19 +449,30 @@ footer .hearts svg{width:14px;height:13px}
 .group{margin:8px 0 22px}
 .group>h2{font-family:var(--script);font-weight:400;font-size:2.3rem;line-height:1.1;color:var(--rose-deep);margin:0 0 2px;text-align:center}
 .group>p{text-align:center;color:var(--ink-soft);font-style:italic;margin:0 0 12px}
-.gift-list{display:grid;gap:12px}
-.gift{display:grid;grid-template-columns:78px 1fr;gap:4px 14px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:0 12px 22px -20px rgba(120,50,70,.7)}
-.gift .gi{position:relative;overflow:hidden;width:78px;height:78px;border-radius:22px;display:grid;place-content:center;font-size:34px;grid-row:span 2;background:radial-gradient(circle at 35% 30%,#fff,#FBEDEF 60%,#F1CDD4);box-shadow:0 0 0 2px var(--gold-soft)}
-.gift .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.gift .gi svg{width:40px;height:32px}
-.gift h3{margin:0;font-size:1.16rem;line-height:1.2}
-.gift .d{color:var(--ink-soft);font-size:.98rem;line-height:1.3}
-.gift .foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px}
-.gift .prog{flex:1;min-width:0}
-.gift .prog small{display:block;font-size:.95rem;color:var(--ink-soft);font-weight:600}
-.gift .prog .bar{height:8px;margin:5px 0 0}
-.gift .pick{padding:9px 16px;font-size:1rem}
+.gift-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gift{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:8px 8px 12px;box-shadow:0 14px 24px -20px rgba(120,50,70,.75)}
+.gift .gi{position:relative;overflow:hidden;aspect-ratio:1;width:100%;border-radius:16px;display:grid;place-content:center;font-size:40px;
+  background:radial-gradient(circle at 35% 30%,#fff,#FBEDEF 60%,#F1CDD4);box-shadow:inset 0 0 0 1px rgba(205,170,92,.45)}
+.gift .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6px;transition:transform .5s}
+.gift:hover .gi img{transform:scale(1.04)}
+.gift .gi svg{width:46px;height:38px}
+.gift .tag{position:absolute;left:8px;top:8px;z-index:2;font-size:.74rem;font-weight:700;letter-spacing:.03em;color:#fff;background:#B06A7D;border-radius:999px;padding:2px 9px;box-shadow:0 4px 10px -4px rgba(90,30,50,.6)}
+.gift .tag.inf{background:linear-gradient(90deg,#C9A24E,#A9842F)}
+.gift h3{margin:10px 4px 2px;font-size:1.04rem;line-height:1.22;text-wrap:balance}
+.gift .d{margin:0 4px;color:var(--ink-soft);font-size:.9rem;line-height:1.3;flex:1}
+.gift .foot{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:10px 4px 0}
+.gift .prog small{display:block;font-size:.86rem;color:var(--ink-soft);font-weight:600}
+.gift .prog .bar{height:7px;margin:5px 0 0}
+.gift .pick{padding:8px 10px;font-size:.98rem;width:100%}
 .gift.mine{border:2px solid var(--ok)}
+.group.prio>h2::after{content:"";display:block;width:64px;height:3px;margin:6px auto 0;border-radius:3px;background:linear-gradient(90deg,#D9B35A,#A9842F)}
+.group.prio .gift{border-color:#E8C3CB}
+.gift.solo{grid-column:1/-1;flex-direction:row;align-items:center;gap:12px}
+.gift.solo .gi{width:84px;flex:none}
+.gift.solo h3{margin-top:0}
+.gift.solo .foot{display:none}
+.gift .tx{flex:1;min-width:0;display:flex;flex-direction:column}
+@media (max-width:330px){.gift-list{grid-template-columns:1fr}}
 .plink{font-weight:700;font-size:.98rem;text-underline-offset:3px}
 .badge{display:inline-block;font-size:.92rem;font-weight:700;color:var(--ok)}
 .prio{display:inline-block;margin-left:6px;font-size:.8rem;font-weight:700;color:#fff;background:#B06A7D;border-radius:999px;padding:1px 9px;vertical-align:2px}
@@ -869,7 +880,7 @@ dialog .row .btn{flex:1;padding:11px 10px}
       <div class="hd"><svg class="crown" viewBox="0 0 40 30"><use href="#crown"/></svg><h2>Ideas de regalo</h2></div>
       <p class="presence"><b>Tu presencia es lo más importante para nosotros</b>, pero si deseas regalarle algo a la princesa Olivia, aquí tienes algunas ideas.</p>
       <div class="bubbles">
-        <div class="bubble"><div class="b">🧸</div><span>Juguetes</span></div>
+        <div class="bubble"><div class="b">🛡️</div><span>Su cuidado</span></div>
         <div class="bubble main"><div class="b"><svg><use href="#diaper"/></svg></div><span>Pañales</span></div>
         <div class="bubble"><div class="b">👗</div><span>Ropita</span></div>
       </div>
@@ -909,7 +920,7 @@ dialog .row .btn{flex:1;padding:11px 10px}
     <a class="back" href="#ideas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg>Invitación</a>
     <h1>Ideas de regalo</h1>
     <p>Tu presencia es lo más importante para nosotros, pero si deseas regalarle algo a la princesa Olivia, aquí tienes algunas ideas.</p>
-    <p>Al elegir un regalo, desaparece de la lista para que no se repita.</p>
+    <p>Los regalos con cantidad limitada desaparecen de la lista cuando se completan, para que no se repitan.</p>
   </header>
   <svg class="gv-edge" viewBox="0 0 400 22" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 0H400V6a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0a20 13 0 0 1-40 0Z"/>
@@ -917,7 +928,7 @@ dialog .row .btn{flex:1;padding:11px 10px}
   <div class="gv-body">
     <div class="need">
       <svg aria-hidden="true"><use href="#diaper"/></svg>
-      <div><b>Lo que más necesitamos: pañales</b><span>Desde talla G: Babysec Súper Premium o Huggies Dermacare, y pañitos Huggies (empaque verde).</span></div>
+      <div><b>Lo que más necesitamos</b><span>Seguridad para la casa (esquineros, protectores de enchufe, seguros de cajones), pañales desde talla G y toallitas Huggies (empaque verde).</span></div>
     </div>
     <div class="chips" id="chips" role="toolbar" aria-label="Filtrar regalos"></div>
     <div id="giftGroups"></div>
@@ -928,7 +939,7 @@ dialog .row .btn{flex:1;padding:11px 10px}
 <dialog id="giftDialog">
   <h3>¡Qué lindo!</h3>
   <p class="what" id="dlgWhat"></p>
-  <p class="hint" style="text-align:center;margin:0 0 16px">Al elegirlo, desaparecerá de la lista para que nadie más lo repita.</p>
+  <p class="hint" id="dlgNote" style="text-align:center;margin:0 0 16px">Al elegirlo, lo apartamos para que nadie más lo repita.</p>
   <form method="dialog" id="dlgForm">
     <div class="row">
       <button type="button" class="btn" id="dlgCancel">Cancelar</button>
@@ -967,36 +978,42 @@ const CUENTO = [
   "Hoy su reino está de fiesta para compartir la alegría de celebrar su primer añito junto a las personas que más queremos en el…"
 ];
 
-/* Regalos de respaldo (la lista real se edita en la hoja "Regalos") */
+/* Regalos de respaldo (la lista real se edita en la hoja "Regalos").
+   qty 0 = sin límite (todos pueden regalarlo), salvo en "otros", donde no necesita reserva. */
+const PV = "https://plazavea.vteximg.com.br/arquivos/ids/";
 const REGALOS = [
-  {id:"pan-babysec-g",cat:"panales",name:"Pañales Babysec Súper Premium talla G",detail:"Paquete grande",qty:8,icon:"diaper"},
-  {id:"pan-huggies-g",cat:"panales",name:"Pañales Huggies Dermacare talla G",detail:"Paquete grande",qty:8,icon:"diaper"},
-  {id:"pan-xg",cat:"panales",name:"Pañales talla XG",detail:"Babysec Súper Premium o Huggies Dermacare",qty:8,icon:"diaper"},
-  {id:"panitos",cat:"panales",name:"Pañitos húmedos Huggies",detail:"Empaque verde",qty:10,icon:"wipes"},
-  {id:"jug-mesa",cat:"juguetes",name:"Mesa de actividades musical",detail:"Luces, sonidos y botones",qty:1,icon:"🎹"},
-  {id:"jug-libros",cat:"juguetes",name:"Libros de texturas",detail:"Para tocar y explorar con las manitos",qty:2,icon:"📚"},
-  {id:"jug-tabla",cat:"juguetes",name:"Tabla y cuchillito Montessori",detail:"Para que Olivia nos ayude a preparar la comida",qty:1,icon:"🥕"},
-  {id:"jug-torre",cat:"juguetes",name:"Torre Montessori",detail:"Para que se pare y nos acompañe a la altura de la mesa",qty:1,icon:"🏰"},
-  {id:"jug-resbaladera",cat:"juguetes",name:"Resbaladera de plástico",detail:"Con piscina o con columpio",qty:1,icon:"🎠"},
-  {id:"ropa-rosado",cat:"ropa",name:"Conjunto color rosado",detail:"Talla 12 a 18 meses",qty:3,icon:"👚"},
-  {id:"ropa-blanco",cat:"ropa",name:"Conjunto color blanco",detail:"Talla 12 a 18 meses",qty:2,icon:"🤍"},
-  {id:"ropa-vestido",cat:"ropa",name:"Vestidito rosado o blanco",detail:"Talla 12 a 18 meses",qty:2,icon:"👗"},
-  {id:"ropa-medias",cat:"ropa",name:"Mediecitas",detail:"Pack de varios pares",qty:3,icon:"🧦"},
-  {id:"ropa-pijama",cat:"ropa",name:"Pijamita de algodón",detail:"Talla 12 a 18 meses",qty:2,icon:"🌙"},
-  {id:"ropa-accesorios",cat:"ropa",name:"Accesorios para el cabello",detail:"Vinchas, lazos y ganchitos",qty:3,icon:"🎀"},
-  {id:"cui-esquineros",cat:"cuidado",name:"Esquineros de seguridad",detail:"Para proteger las esquinas de los muebles",qty:2,icon:"🛡️"},
-  {id:"cui-cierrapuertas",cat:"cuidado",name:"Cierra puertas de seguridad",detail:"Para que no se pille los deditos al caminar",qty:2,icon:"🚪"},
-  {id:"cui-vajilla",cat:"cuidado",name:"Vajilla de cerámica",detail:"Para sus primeras comidas",qty:1,icon:"🥣"},
-  {id:"cui-portabebe",cat:"cuidado",name:"Asiento portabebé AÚPA",detail:"Soporte de cadera para cargarla como en brazos",qty:1,icon:"👶",url:"https://aupa.pe/products/asiento-portabebe"},
+  {id:"cui-esquineros",cat:"cuidado",name:"Esquineros de silicona",detail:"Para proteger las esquinas de mesas y muebles",qty:3,icon:"🛡️",foto:PV+"32039011-600-600/imageUrl_1.jpg"},
+  {id:"cui-enchufes",cat:"cuidado",name:"Protectores de enchufe",detail:"Tapitas para que no meta los deditos en los enchufes",qty:3,icon:"🔌",foto:PV+"218457-600-600/20136782.jpg"},
+  {id:"cui-cajones",cat:"cuidado",name:"Seguros para cajones y muebles",detail:"Para que no abra cajones ni gabinetes",qty:3,icon:"🔒",foto:PV+"31599991-600-600/imageUrl_1.jpg"},
+  {id:"cui-cierrapuertas",cat:"cuidado",name:"Tope de puerta antipellizcos",detail:"Para que no se pille los deditos con la puerta",qty:2,icon:"🚪",foto:PV+"30965619-600-600/2416181.jpg"},
+  {id:"cui-vajilla",cat:"cuidado",name:"Vajilla de cerámica",detail:"Platito y tacita para sus primeras comidas",qty:2,icon:"🥣",foto:PV+"32273144-600-600/imageUrl_1.jpg"},
+  {id:"cui-portabebe",cat:"cuidado",name:"Asiento portabebé AÚPA",detail:"Soporte de cadera para cargarla como en brazos",qty:1,icon:"👶",url:"https://aupa.pe/products/asiento-portabebe",foto:"https://aupa.pe/cdn/shop/files/5.auparosa.jpg?width=600"},
+  {id:"pan-babysec-g",cat:"panales",name:"Pañales Babysec Súper Premium talla G",detail:"Paquete grande",qty:0,icon:"diaper",foto:PV+"29198982-600-600/20424517.jpg"},
+  {id:"pan-huggies-g",cat:"panales",name:"Pañales Huggies Dermacare talla G",detail:"Paquete grande",qty:0,icon:"diaper",foto:PV+"36115662-600-600/20424525.jpg"},
+  {id:"pan-xg",cat:"panales",name:"Pañales talla XG",detail:"Babysec Súper Premium o Huggies Dermacare",qty:0,icon:"diaper",foto:PV+"29198984-600-600/20424522.jpg"},
+  {id:"panitos",cat:"panales",name:"Toallitas húmedas Huggies",detail:"Empaque verde",qty:0,icon:"wipes",foto:PV+"34366159-600-600/20497896.jpg"},
+  {id:"ropa-rosado",cat:"ropa",name:"Conjunto color rosado",detail:"Talla 12 a 18 meses",qty:0,icon:"👚",foto:PV+"34214000-600-600/20520325.jpg"},
+  {id:"ropa-blanco",cat:"ropa",name:"Conjunto color blanco",detail:"Talla 12 a 18 meses",qty:0,icon:"🤍",foto:PV+"32031725-600-600/image-067d7f24e487462d8b9b4314532a9164.jpg"},
+  {id:"ropa-vestido",cat:"ropa",name:"Vestidito rosado o blanco",detail:"Talla 12 a 18 meses",qty:0,icon:"👗",foto:PV+"34213737-600-600/20518331.jpg"},
+  {id:"ropa-medias",cat:"ropa",name:"Mediecitas",detail:"Pack de varios pares",qty:0,icon:"🧦",foto:PV+"31076976-600-600/20438980.jpg"},
+  {id:"ropa-pijama",cat:"ropa",name:"Pijamita de algodón",detail:"Talla 12 a 18 meses",qty:0,icon:"🌙",foto:PV+"34434658-600-600/20521327.jpg"},
+  {id:"ropa-accesorios",cat:"ropa",name:"Accesorios para el cabello",detail:"Vinchas, lazos y ganchitos",qty:0,icon:"🎀",foto:PV+"36273275-600-600/image-7b9759b3aff549ba91cc69865ec04dbe.jpg"},
+  {id:"jug-mesa",cat:"juguetes",name:"Mesa de actividades musical",detail:"Luces, sonidos y botones",qty:1,icon:"🎹",foto:PV+"36081432-600-600/imageUrl_1.jpg"},
+  {id:"jug-libros",cat:"juguetes",name:"Libros de texturas",detail:"Para tocar y explorar con las manitos",qty:2,icon:"📚",foto:PV+"35306625-600-600/imageUrl_1.jpg"},
+  {id:"jug-tabla",cat:"juguetes",name:"Tabla y cuchillito Montessori",detail:"Cuchillo ondulado seguro para que Olivia nos ayude en la cocina",qty:1,icon:"🥕",foto:PV+"30607543-600-600/imageUrl_1.jpg"},
+  {id:"jug-torre",cat:"juguetes",name:"Torre Montessori",detail:"Para que se pare y nos acompañe a la altura de la mesa",qty:1,icon:"🏰",foto:PV+"35634575-600-600/Image-1.jpg"},
+  {id:"jug-resbaladera",cat:"juguetes",name:"Resbaladera de plástico",detail:"Con piscina o con columpio",qty:1,icon:"🎠",foto:PV+"30121575-600-600/20417721.jpg"},
   {id:"sobres",cat:"otros",name:"Lluvia de sobres",detail:"Siempre bienvenida, no necesita reserva",qty:0,icon:"💌"}
 ];
 const GRUPOS = [
-  ["panales","Pañales y pañitos","Desde talla G"],
-  ["juguetes","Juguetes","Recomendados para niños desde el año y medio"],
-  ["ropa","Ropita","Conjuntos en rosado y blanco, mediecitas y accesorios"],
-  ["cuidado","Para su cuidado","Para que explore con seguridad"],
+  ["cuidado","Su cuidado y seguridad","Ahora que Olivia camina y explora toda la casa"],
+  ["panales","Pañales y toallitas","Desde talla G · todos pueden regalarlos"],
+  ["ropa","Ropita","Talla 12 a 18 meses, en rosado y blanco · todos pueden regalarla"],
+  ["juguetes","Juguetes","Para jugar, aprender y moverse"],
   ["otros","Otros",""]
 ];
+const PRIORIDAD = ["cuidado", "panales"];
+const ilimitado = g => g.qty === 0 && g.cat !== "otros";
 /* ===================== utilidades ===================== */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1352,7 +1369,7 @@ function FairyGallery(root){
   function go(i, user){
     const n = slides.length; if (n < 2) return;
     cur = (i + n) % n; layout(true);
-    if (user) pauseUntil = Date.now() + 9000;
+    if (user) pauseUntil = Date.now() + 5000;
   }
   function tick(){ if (visible && Date.now() > pauseUntil && document.visibilityState === "visible") go(cur + 1); }
   dots.addEventListener("click", e => { const b = e.target.closest("button"); if (b) go([...dots.children].indexOf(b), true); });
@@ -1365,7 +1382,7 @@ function FairyGallery(root){
   else visible = true;
   build([]);
   Promise.all(Array.from({ length: max }, (_, i) => tryLoad(`fotos/${prefix}${i + 1}.jpg`))).then(r => { const ok = r.filter(Boolean); if (ok.length){ cur = 0; build(ok); } });
-  timer = setInterval(tick, 4600);
+  timer = setInterval(tick, 2800);
 }
 document.querySelectorAll(".fg").forEach(FairyGallery);
 
@@ -1454,7 +1471,7 @@ async function api(payload){
 }
 function applyState(d){
   if (!d) return;
-  if (Array.isArray(d.gifts) && d.gifts.length) state.gifts = d.gifts.map(g => ({ id: String(g.id), cat: g.cat || "otros", name: g.name, detail: g.detail || "", qty: Number(g.qty) || 0, icon: g.icon || "🎁", url: g.url || "", foto: g.foto || "", taken: Number(g.taken) || 0 }));
+  if (Array.isArray(d.gifts) && d.gifts.length) state.gifts = d.gifts.map(g => ({ id: String(g.id), cat: g.cat || "otros", name: g.name, detail: g.detail || "", qty: Number(g.qty) || 0, icon: g.icon || "🎁", url: g.url || "", foto: g.foto || ((REGALOS.find(x => x.id === String(g.id)) || {}).foto || ""), taken: Number(g.taken) || 0 }));
   if (Array.isArray(d.guests)) state.guests = d.guests.map(g => ({ id: String(g.id), nombre: String(g.nombre), cupos: Number(g.cupos) || 0, r: g.r || null }));
   if ("showCounter" in d) state.showCounter = !!d.showCounter;
   if ("capacity" in d) state.capacity = Number(d.capacity) || 100;
@@ -1493,7 +1510,7 @@ const RSVP = (function(){
   if (!CONFIG.api) $("#demoNote").hidden = false;
 
   const isClosed = () => Date.now() > new Date(state.closeAt || CONFIG.cierre).getTime();
-  const strict = () => state.guests.length > 0;   // con lista cargada, solo confirman los invitados de la lista
+  const strict = () => false;   // confirmación abierta: cada invitado escribe su nombre y el de sus acompañantes (máx. 4)
   const maxFor = () => guest ? (guest.cupos || 1) : CONFIG.maxSinLista;
   const hint = msg => { const h = $("#findHint"); h.textContent = msg || ""; h.hidden = !msg; };
   function gate(){
@@ -1741,25 +1758,29 @@ const iconHTML = ic => (ic === "diaper" || ic === "wipes") ? `<svg aria-hidden="
 function visibleGifts(){ const my = mine(); return state.gifts.filter(g => !(state.online && g.qty > 0 && g.taken >= g.qty && !my.includes(g.id))); }
 function renderGifts(){
   const vis = visibleGifts(), my = mine();
-  $("#chips").innerHTML = [["todos","Todos"]].concat(GRUPOS.filter(([k]) => state.gifts.some(g => g.cat === k)).map(([k, t]) => [k, k === "panales" ? "Pañales" : t]))
+  $("#chips").innerHTML = [["todos","Todos"]].concat(GRUPOS.filter(([k]) => state.gifts.some(g => g.cat === k)).map(([k, t]) => [k, k === "panales" ? "Pañales" : k === "cuidado" ? "Cuidado" : t]))
     .map(([k, l]) => `<button type="button" class="chip" data-c="${k}" aria-pressed="${k === filtro}">${esc(l)}</button>`).join("");
   const groups = GRUPOS.filter(([k]) => (filtro === "todos" || filtro === k) && state.gifts.some(g => g.cat === k));
   $("#giftGroups").innerHTML = groups.map(([k, t, sub]) => {
-    const cards = vis.filter(g => g.cat === k).map(g => {
-      const isMine = my.includes(g.id), left = g.qty > 0 ? g.qty - g.taken : Infinity, link = safeUrl(g.url);
+    const ord = id => { const i = REGALOS.findIndex(x => x.id === id); return i < 0 ? 999 : i; };
+    const cards = vis.filter(g => g.cat === k).sort((a, b) => ord(a.id) - ord(b.id)).map(g => {
+      const isMine = my.includes(g.id), inf = ilimitado(g), left = g.qty > 0 ? g.qty - g.taken : Infinity, link = safeUrl(g.url);
       let prog;
-      if (g.qty === 0) prog = `<small>No necesita reserva</small>`;
+      if (g.qty === 0 && !inf) prog = `<small>No necesita reserva</small>`;
+      else if (inf) prog = `<small>${state.online && g.taken ? `${g.taken} ${g.taken === 1 ? "persona ya lo eligió" : "personas ya lo eligieron"}` : "Todos pueden regalarlo"}</small>`;
       else if (isMine && state.online && left <= 0) prog = `<small>¡Gracias! Ya está cubierto</small>`;
-      else if (!state.online) prog = `<small>${g.qty > 1 ? `Buscamos ${g.qty}` : "Disponible"}</small>`;
-      else if (g.qty === 1) prog = `<small>Disponible</small>`;
-      else prog = `<small>Faltan ${left} de ${g.qty}</small><div class="bar"><i style="width:${Math.min(100, g.taken / g.qty * 100)}%"></i></div>`;
-      const btn = g.qty === 0 || (state.online && left <= 0) || isMine ? "" : `<button type="button" class="btn solid pick" data-id="${esc(g.id)}">Lo regalo yo</button>`;
-      return `<article class="gift ${isMine ? "mine" : ""}"><div class="gi">${iconHTML(g.icon)}<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy"></div>
-        <h3>${esc(g.name)}${k === "panales" ? '<span class="prio">Prioridad</span>' : ""}</h3>
-        <div class="d">${esc(g.detail)}${link ? `<br><a class="plink" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver producto ↗</a>` : ""}${isMine ? '<br><span class="badge">✓ Tú elegiste este regalo</span>' : ""}</div>
+      else if (!state.online) prog = `<small>${g.qty > 1 ? `Buscamos ${g.qty}` : "Disponible: 1"}</small>`;
+      else if (g.qty === 1) prog = `<small>Disponible: 1</small>`;
+      else prog = `<small>Quedan ${left} de ${g.qty}</small><div class="bar"><i style="width:${Math.min(100, g.taken / g.qty * 100)}%"></i></div>`;
+      const btn = (g.qty === 0 && !inf) || (state.online && left <= 0) || isMine ? "" : `<button type="button" class="btn solid pick" data-id="${esc(g.id)}">Lo regalo yo</button>`;
+      const tag = PRIORIDAD.includes(k) ? `<span class="tag">Prioridad</span>` : (inf ? `<span class="tag inf">Sin límite</span>` : "");
+      const img = k === "otros" && !g.foto ? "" : `<img src="${esc(giftPhoto(g))}" alt="${esc(g.name)}" loading="lazy">`;
+      return `<article class="gift ${isMine ? "mine" : ""} ${k === "otros" ? "solo" : ""}">${tag}<div class="gi">${iconHTML(g.icon)}${img}</div>
+        <div class="tx"><h3>${esc(g.name)}</h3>
+        <p class="d">${esc(g.detail)}${link ? `<br><a class="plink" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver producto ↗</a>` : ""}${isMine ? '<br><span class="badge">✓ Tú elegiste este regalo</span>' : ""}</p></div>
         <div class="foot"><div class="prog">${prog}</div>${btn}</div></article>`;
     }).join("");
-    return `<section class="group"><h2>${esc(t)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}<div class="gift-list">${cards || `<p class="empty">¡Todos los regalos de esta sección ya fueron elegidos! Gracias 💗</p>`}</div></section>`;
+    return `<section class="group ${PRIORIDAD.includes(k) ? "prio" : ""}"><h2>${esc(t)}</h2>${sub ? `<p>${esc(sub)}</p>` : ""}<div class="gift-list">${cards || `<p class="empty">¡Todos los regalos de esta sección ya fueron elegidos! Gracias 💗</p>`}</div></section>`;
   }).join("");
 }
 $("#giftGroups").addEventListener("error", e => { if (e.target && e.target.tagName === "IMG") e.target.remove(); }, true);   // sin foto: queda el icono
@@ -1768,6 +1789,7 @@ $("#giftGroups").addEventListener("click", e => {
   const b = e.target.closest(".pick"); if (!b) return;
   giftSel = state.gifts.find(g => g.id === b.dataset.id); if (!giftSel) return;
   $("#dlgWhat").textContent = giftSel.name;
+  $("#dlgNote").textContent = ilimitado(giftSel) ? "Este regalo no tiene límite: otras personas también pueden elegirlo." : "Al elegirlo, lo apartamos para que nadie más lo repita.";
   const dlg = $("#giftDialog"); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
   setTimeout(() => $("#dlgOk").focus(), 50);
 });
